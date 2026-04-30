@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ILP Analyzer — Instruction Level Parallelism</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #0d0f14;
+  --surface: #141720;
+  --surface2: #1c2030;
+  --surface3: #242840;
+  --border: #2a2f45;
+  --border2: #343a55;
+  --text: #e2e6f0;
+  --text2: #8b92b0;
+  --text3: #555c7a;
+  --accent: #5b8af5;
+  --accent2: #7ba3ff;
+  --green: #3ecf8e;
+  --amber: #f59e0b;
+  --red: #f87171;
+  --pink: #e879a0;
+  --purple: #a78bfa;
+  --teal: #38c6c0;
+  --raw: #f87171;
+  --war: #f59e0b;
+  --waw: #a78bfa;
+  --critical: #3ecf8e;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 8px;
+  --radius-lg: 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.5; min-height: 100vh; }
+
+/* Layout */
+.shell { display: grid; grid-template-rows: auto 1fr; min-height: 100vh; }
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px; position: sticky; top: 0; z-index: 100;
+}
+.topbar-left { display: flex; align-items: center; gap: 16px; }
+.logo { font-family: var(--mono); font-size: 15px; font-weight: 500; color: var(--accent2); letter-spacing: -0.5px; }
+.logo span { color: var(--text2); }
+.tagline { font-size: 12px; color: var(--text3); font-family: var(--mono); }
+
+.main { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 56px); }
+.sidebar {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 20px;
+  display: flex; flex-direction: column; gap: 16px;
+  overflow-y: auto;
+}
+.content { overflow: auto; }
+
+/* Upload zone */
+.upload-zone {
+  border: 1.5px dashed var(--border2);
+  border-radius: var(--radius-lg);
+  padding: 20px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  background: var(--surface2);
+}
+.upload-zone:hover, .upload-zone.drag { border-color: var(--accent); background: rgba(91,138,245,0.05); }
+.upload-zone .upload-icon { font-size: 28px; margin-bottom: 8px; opacity: 0.5; }
+.upload-zone p { font-size: 12px; color: var(--text2); }
+.upload-zone strong { color: var(--text); font-size: 13px; }
+#jsonFile { display: none; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: var(--radius);
+  border: 1px solid var(--border2); background: var(--surface2);
+  color: var(--text); font-size: 13px; font-family: var(--font);
+  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+}
+.btn:hover { background: var(--surface3); border-color: var(--border2); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
+.btn-sm { padding: 5px 10px; font-size: 12px; }
+.btn-full { width: 100%; justify-content: center; }
+.btn-icon { padding: 6px; }
+
+/* Section headers in sidebar */
+.sidebar-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); margin-top: 4px; }
+
+/* Stat cards */
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.stat-card {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 12px 10px;
+}
+.stat-card .label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.stat-card .value { font-size: 22px; font-weight: 600; font-family: var(--mono); color: var(--text); line-height: 1; }
+.stat-card .value.accent { color: var(--accent2); }
+.stat-card .value.green { color: var(--green); }
+.dep-pills { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
+.dep-pill { font-size: 10px; font-family: var(--mono); padding: 2px 6px; border-radius: 4px; }
+.dep-pill.raw { background: rgba(248,113,113,0.15); color: var(--raw); }
+.dep-pill.war { background: rgba(245,158,11,0.15); color: var(--war); }
+.dep-pill.waw { background: rgba(167,139,250,0.15); color: var(--waw); }
+
+/* ILP bars */
+.ilp-section { display: flex; flex-direction: column; gap: 8px; }
+.ilp-row { display: flex; flex-direction: column; gap: 4px; }
+.ilp-row-head { display: flex; justify-content: space-between; align-items: center; }
+.ilp-row-head span { font-size: 11px; color: var(--text2); }
+.ilp-row-head strong { font-size: 13px; font-family: var(--mono); color: var(--text); }
+.ilp-track { height: 6px; background: var(--surface3); border-radius: 3px; overflow: hidden; }
+.ilp-fill { height: 100%; border-radius: 3px; transition: width 0.6s cubic-bezier(0.4,0,0.2,1); }
+.ilp-fill.inorder { background: var(--text3); }
+.ilp-fill.ooo { background: var(--amber); }
+.ilp-fill.ideal { background: var(--green); }
+
+/* Tabs */
+.tab-bar {
+  display: flex; gap: 0; border-bottom: 1px solid var(--border);
+  background: var(--surface); padding: 0 24px;
+  position: sticky; top: 56px; z-index: 90;
+}
+.tab-btn {
+  padding: 14px 18px; font-size: 13px; font-family: var(--font);
+  color: var(--text2); background: none; border: none; cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: var(--text); background: none; }
+.tab-btn.active { color: var(--accent2); border-bottom-color: var(--accent); }
+
+.tab-panel { display: none; padding: 24px; }
+.tab-panel.active { display: block; }
+
+/* Controls row */
+.ctrl-row {
+  display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  margin-bottom: 20px;
+}
+.ctrl-group { display: flex; align-items: center; gap: 6px; }
+.ctrl-label { font-size: 12px; color: var(--text2); }
+select, input[type="number"], input[type="text"] {
+  background: var(--surface2); border: 1px solid var(--border2); border-radius: var(--radius);
+  color: var(--text); font-size: 13px; font-family: var(--font); padding: 6px 10px;
+  outline: none; transition: border-color 0.15s;
+}
+select:focus, input:focus { border-color: var(--accent); }
+input[type="number"] { width: 80px; }
+input[type="text"] { min-width: 200px; }
+input[type="checkbox"] { accent-color: var(--accent); }
+
+/* Timeline */
+.timeline-wrap { overflow-x: auto; background: var(--surface2); border-radius: var(--radius-lg); border: 1px solid var(--border); }
+.cycle-bar {
+  display: flex; gap: 20px; padding: 12px 16px;
+  background: var(--surface); border-top: 1px solid var(--border);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  font-size: 12px; color: var(--text2);
+}
+.cycle-bar strong { color: var(--accent2); font-family: var(--mono); }
+
+/* Graph */
+.graph-wrap { background: var(--surface2); border-radius: var(--radius-lg); border: 1px solid var(--border); min-height: 500px; }
+.graph-legend { display: flex; gap: 20px; flex-wrap: wrap; padding: 12px 16px; border-top: 1px solid var(--border); font-size: 12px; }
+.legend-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
+
+/* Instructions table */
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-lg); }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+thead th {
+  background: var(--surface2); padding: 10px 12px; text-align: left;
+  font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+  color: var(--text3); border-bottom: 1px solid var(--border); white-space: nowrap;
+  position: sticky; top: 0;
+}
+tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+tbody tr:hover { background: var(--surface2); }
+tbody td { padding: 9px 12px; color: var(--text2); }
+tbody td:first-child { font-family: var(--mono); color: var(--text3); }
+code { font-family: var(--mono); font-size: 11px; color: var(--text); }
+
+.badge {
+  display: inline-block; padding: 2px 7px; border-radius: 4px;
+  font-size: 10px; font-weight: 600; font-family: var(--mono);
+}
+.badge.alu { background: rgba(91,138,245,0.15); color: #7ba3ff; }
+.badge.load { background: rgba(62,207,142,0.15); color: var(--green); }
+.badge.store { background: rgba(245,158,11,0.15); color: var(--amber); }
+.badge.branch { background: rgba(232,121,160,0.15); color: var(--pink); }
+.badge.fpu { background: rgba(167,139,250,0.15); color: var(--purple); }
+.badge.loop { background: rgba(56,198,192,0.15); color: var(--teal); }
+.badge.ctrl { background: rgba(248,113,113,0.15); color: var(--red); }
+.badge.other { background: rgba(139,146,176,0.15); color: var(--text2); }
+
+/* Histogram */
+.hist-wrap { background: var(--surface2); border-radius: var(--radius-lg); border: 1px solid var(--border); padding: 20px; }
+.hist-stats { display: flex; gap: 24px; margin-top: 16px; font-size: 13px; }
+.hist-stat span { color: var(--text3); }
+.hist-stat strong { color: var(--accent2); font-family: var(--mono); }
+
+/* Empty state */
+.empty-state {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px; padding: 80px 40px; color: var(--text3); text-align: center;
+}
+.empty-state .big-icon { font-size: 48px; opacity: 0.3; }
+.empty-state p { font-size: 14px; }
+
+/* Tooltip */
+.tooltip {
+  position: fixed; pointer-events: none;
+  background: var(--surface3); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 8px 12px; font-size: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4); z-index: 1000; max-width: 200px;
+  display: none;
+}
+.tooltip.show { display: block; }
+
+/* SVG graph styles */
+.link { fill: none; stroke-width: 1.5px; opacity: 0.5; }
+.link.raw { stroke: var(--raw); }
+.link.war { stroke: var(--war); }
+.link.waw { stroke: var(--waw); }
+.node circle { stroke-width: 2px; }
+.node text { font-size: 10px; font-family: var(--mono); font-weight: 500; }
+.node.critical circle { stroke: var(--critical) !important; stroke-width: 2.5px; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .main { grid-template-columns: 1fr; }
+  .sidebar { border-right: none; border-bottom: 1px solid var(--border); }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="logo">ILP<span>.</span>analyzer</div>
+      <div class="tagline">Instruction Level Parallelism Estimator</div>
+    </div>
+    <div id="fileStatus" style="font-size:12px;color:var(--text3);font-family:var(--mono)">no file loaded</div>
+  </div>
+
+  <div class="main">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div>
+        <div class="sidebar-label" style="margin-bottom:8px">Input</div>
+        <div class="upload-zone" id="dropZone" onclick="document.getElementById('jsonFile').click()">
+          <div class="upload-icon">⬆</div>
+          <strong>Drop JSON trace here</strong>
+          <p style="margin-top:4px">or click to browse</p>
+        </div>
+        <input type="file" id="jsonFile" accept=".json">
+        <button class="btn btn-full" onclick="loadSampleData()" style="margin-top:8px">
+          ⚡ Load Sample Trace
+        </button>
+      </div>
+
+      <div id="statsPanel" style="display:none">
+        <div class="sidebar-label" style="margin-bottom:8px">Trace Summary</div>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="label">Instructions</div>
+            <div class="value accent" id="totalInstructions">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Critical Path</div>
+            <div class="value" id="criticalPathLength">—</div>
+            <div style="font-size:10px;color:var(--text3);margin-top:2px">cycles</div>
+          </div>
+          <div class="stat-card" style="grid-column:1/-1">
+            <div class="label">Dependencies</div>
+            <div class="value" id="totalDependencies">—</div>
+            <div class="dep-pills">
+              <span class="dep-pill raw">RAW <span id="rawCount">0</span></span>
+              <span class="dep-pill war">WAR <span id="warCount">0</span></span>
+              <span class="dep-pill waw">WAW <span id="wawCount">0</span></span>
+            </div>
+          </div>
+          <div class="stat-card" style="grid-column:1/-1">
+            <div class="label">Theoretical ILP</div>
+            <div class="value green" id="theoreticalILP">—</div>
+          </div>
+        </div>
+
+        <div class="sidebar-label" style="margin-top:12px;margin-bottom:8px">ILP by Model</div>
+        <div class="ilp-section">
+          <div class="ilp-row">
+            <div class="ilp-row-head">
+              <span>In-Order</span>
+              <strong id="inOrderILP">—</strong>
+            </div>
+            <div class="ilp-track"><div class="ilp-fill inorder" id="inOrderBar" style="width:0%"></div></div>
+          </div>
+          <div class="ilp-row">
+            <div class="ilp-row-head">
+              <span>Out-of-Order</span>
+              <strong id="outOfOrderILP">—</strong>
+            </div>
+            <div class="ilp-track"><div class="ilp-fill ooo" id="oooBar" style="width:0%"></div></div>
+          </div>
+          <div class="ilp-row">
+            <div class="ilp-row-head">
+              <span>Ideal (unlimited)</span>
+              <strong id="idealILP">—</strong>
+            </div>
+            <div class="ilp-track"><div class="ilp-fill ideal" id="idealBar" style="width:0%"></div></div>
+          </div>
+        </div>
+
+        <div class="sidebar-label" style="margin-top:12px;margin-bottom:8px">Instruction Mix</div>
+        <div id="instrMix" style="display:flex;flex-direction:column;gap:4px"></div>
+      </div>
+
+      <div style="flex:1"></div>
+      <div style="font-size:10px;color:var(--text3);font-family:var(--mono)">
+        Load a PIN-tool JSON trace or use sample data.
+        Supports RAW/WAR/WAW dependency detection and
+        in-order, OOO, and ideal scheduling models.
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="content" id="mainContent">
+      <div class="empty-state" id="emptyState">
+        <div class="big-icon">⚙</div>
+        <p>Load a trace file or click <strong style="color:var(--accent2)">"Load Sample Trace"</strong> to get started</p>
+        <p style="font-size:12px;margin-top:4px">Analyzes instruction-level parallelism, dependencies, and scheduling</p>
+      </div>
+
+      <div id="analysisUI" style="display:none">
+        <!-- Tab bar -->
+        <div class="tab-bar">
+          <button class="tab-btn active" data-tab="timeline">Timeline</button>
+          <button class="tab-btn" data-tab="dependency">Dependency Graph</button>
+          <button class="tab-btn" data-tab="instructions">Instructions</button>
+          <button class="tab-btn" data-tab="histogram">Parallelism Dist.</button>
+        </div>
+
+        <!-- Timeline tab -->
+        <div class="tab-panel active" id="timeline">
+          <div class="ctrl-row">
+            <div class="ctrl-group">
+              <span class="ctrl-label">Schedule:</span>
+              <select id="scheduleType">
+                <option value="ideal">Ideal (Unlimited Resources)</option>
+                <option value="ooo">Out-of-Order</option>
+                <option value="inOrder">In-Order</option>
+              </select>
+            </div>
+            <div class="ctrl-group">
+              <span class="ctrl-label">Show:</span>
+              <input type="number" id="maxInstrDisplay" value="50" min="5" max="500">
+              <span class="ctrl-label">instrs</span>
+            </div>
+            <button class="btn btn-sm" id="playTimeline">▶ Play</button>
+            <button class="btn btn-sm" id="resetTimeline">↺ Reset</button>
+          </div>
+          <div class="timeline-wrap">
+            <div id="timelineContainer" style="overflow-x:auto;padding:16px 16px 8px;min-height:300px"></div>
+            <div class="cycle-bar">
+              <span>Cycle <strong id="currentCycle">—</strong></span>
+              <span>Issued <strong id="issuedCount">—</strong></span>
+              <span>In-flight <strong id="inFlightCount">—</strong></span>
+              <span>Completed <strong id="completedCount">—</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dependency graph tab -->
+        <div class="tab-panel" id="dependency">
+          <div class="ctrl-row">
+            <label class="ctrl-group">
+              <input type="checkbox" id="showRAW" checked>
+              <span style="color:var(--raw);font-size:12px">● RAW (true dep.)</span>
+            </label>
+            <label class="ctrl-group">
+              <input type="checkbox" id="showWAR" checked>
+              <span style="color:var(--war);font-size:12px">● WAR (anti)</span>
+            </label>
+            <label class="ctrl-group">
+              <input type="checkbox" id="showWAW" checked>
+              <span style="color:var(--waw);font-size:12px">● WAW (output)</span>
+            </label>
+            <div class="ctrl-group">
+              <span class="ctrl-label">Show first</span>
+              <input type="number" id="graphInstrCount" value="30" min="5" max="100">
+              <span class="ctrl-label">instrs</span>
+            </div>
+            <button class="btn btn-sm" id="refreshGraph">↺ Refresh</button>
+          </div>
+          <div class="graph-wrap" id="graphContainer"></div>
+          <div class="graph-legend">
+            <span><span class="legend-dot" style="background:var(--raw)"></span>RAW dependency</span>
+            <span><span class="legend-dot" style="background:var(--war)"></span>WAR dependency</span>
+            <span><span class="legend-dot" style="background:var(--waw)"></span>WAW dependency</span>
+            <span><span class="legend-dot" style="background:var(--critical);width:10px;height:10px;border-radius:2px"></span>Critical path node</span>
+          </div>
+        </div>
+
+        <!-- Instructions tab -->
+        <div class="tab-panel" id="instructions">
+          <div class="ctrl-row">
+            <input type="text" id="instrSearch" placeholder="Search disasm, address, type…">
+            <div class="ctrl-group">
+              <span class="ctrl-label">Type:</span>
+              <select id="instrTypeFilter">
+                <option value="all">All</option>
+                <option value="ALU">ALU</option>
+                <option value="LOAD">LOAD</option>
+                <option value="STORE">STORE</option>
+                <option value="BRANCH">BRANCH</option>
+                <option value="FPU">FPU</option>
+                <option value="LOOP">LOOP</option>
+                <option value="CTRL">CTRL</option>
+              </select>
+            </div>
+            <span id="instrCount" style="font-size:12px;color:var(--text3)"></span>
+          </div>
+          <div class="tbl-wrap">
+            <table id="instructionTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Address</th>
+                  <th>Disassembly</th>
+                  <th>Type</th>
+                  <th>Src Regs</th>
+                  <th>Dst Regs</th>
+                  <th>Latency</th>
+                  <th>Issue (In-Ord)</th>
+                  <th>Issue (OOO)</th>
+                  <th>Issue (Ideal)</th>
+                  <th>Complete</th>
+                </tr>
+              </thead>
+              <tbody id="instructionBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Histogram tab -->
+        <div class="tab-panel" id="histogram">
+          <div class="hist-wrap">
+            <div id="histogramContainer" style="min-height:300px"></div>
+            <div class="hist-stats">
+              <div class="hist-stat"><span>Peak parallelism: </span><strong id="peakParallelism">—</strong></div>
+              <div class="hist-stat"><span>Average parallelism: </span><strong id="avgParallelism">—</strong></div>
+              <div class="hist-stat"><span>Total cycles (ideal): </span><strong id="totalCycles">—</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+// ─────────────────────────────────────────────
+// State
+// ─────────────────────────────────────────────
+let analysisData = null;
+let timelineTimer = null;
+let currentCycleIdx = 0;
+
+// ─────────────────────────────────────────────
+// Init
+// ─────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  // File input
+  document.getElementById('jsonFile').addEventListener('change', e => {
+    const f = e.target.files[0];
+    if (!f) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      try {
+        analysisData = JSON.parse(ev.target.result);
+        document.getElementById('fileStatus').textContent = f.name;
+        displayResults();
+      } catch(err) {
+        alert('Error parsing JSON: ' + err.message);
+      }
+    };
+    reader.readAsText(f);
+  });
+
+  // Drag and drop
+  const dz = document.getElementById('dropZone');
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('drag'));
+  dz.addEventListener('drop', e => {
+    e.preventDefault(); dz.classList.remove('drag');
+    const f = e.dataTransfer.files[0];
+    if (!f) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      try {
+        analysisData = JSON.parse(ev.target.result);
+        document.getElementById('fileStatus').textContent = f.name;
+        displayResults();
+      } catch(err) { alert('Error parsing JSON: ' + err.message); }
+    };
+    reader.readAsText(f);
+  });
+
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b === btn));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === tab));
+      // Re-render D3 panels on show (they need proper dimensions)
+      if (tab === 'dependency') renderDependencyGraph();
+      if (tab === 'histogram') renderHistogram();
+    });
+  });
+
+  // Timeline controls
+  document.getElementById('scheduleType').addEventListener('change', renderTimeline);
+  document.getElementById('maxInstrDisplay').addEventListener('change', renderTimeline);
+  document.getElementById('playTimeline').addEventListener('click', togglePlay);
+  document.getElementById('resetTimeline').addEventListener('click', resetTimeline);
+
+  // Graph controls
+  document.getElementById('refreshGraph').addEventListener('click', renderDependencyGraph);
+  document.getElementById('showRAW').addEventListener('change', renderDependencyGraph);
+  document.getElementById('showWAR').addEventListener('change', renderDependencyGraph);
+  document.getElementById('showWAW').addEventListener('change', renderDependencyGraph);
+  document.getElementById('graphInstrCount').addEventListener('change', renderDependencyGraph);
+
+  // Instruction table controls
+  document.getElementById('instrSearch').addEventListener('input', filterInstructions);
+  document.getElementById('instrTypeFilter').addEventListener('change', filterInstructions);
+});
+
+// ─────────────────────────────────────────────
+// Sample data generator
+// ─────────────────────────────────────────────
+function generateSampleData() {
+  const types = ['ALU','LOAD','STORE','BRANCH','ALU','ALU','FPU','LOOP','ALU','CTRL'];
+  const regs = ['RAX','RBX','RCX','RDX','RSI','RDI','R8','R9','R10','R11','XMM0','XMM1'];
+  const mnemonics = {
+    ALU: ['add','sub','and','or','xor','shl','imul','lea'],
+    LOAD: ['mov','movzx','movsx'],
+    STORE: ['mov','push','movdqu'],
+    BRANCH: ['jne','je','jl','jg','jmp'],
+    FPU: ['addss','mulss','divss','subss'],
+    LOOP: ['loop','dec','inc'],
+    CTRL: ['call','ret','nop'],
+  };
+
+  const instructions = [];
+  const N = 60;
+  for (let i = 0; i < N; i++) {
+    const type = types[i % types.length];
+    const mn = mnemonics[type] || ['nop'];
+    const mnemonic = mn[Math.floor(Math.random() * mn.length)];
+    const srcRegs = [regs[Math.floor(Math.random() * regs.length)]];
+    if (Math.random() > 0.4) srcRegs.push(regs[Math.floor(Math.random() * regs.length)]);
+    const dstRegs = type === 'STORE' || type === 'CTRL' ? [] : [regs[Math.floor(Math.random() * regs.length)]];
+    const lat = type === 'LOAD' ? 4 : type === 'FPU' ? 5 : type === 'STORE' ? 2 : type === 'BRANCH' ? 1 : type === 'LOOP' ? 1 : 1;
+
+    instructions.push({
+      order: i,
+      address: '0x' + (0x400000 + i * 4).toString(16),
+      disasm: `${mnemonic} ${[...dstRegs,...srcRegs].join(', ')}`,
+      type,
+      srcRegs,
+      dstRegs,
+      latency: lat,
+      inOrderIssue: i,
+      inOrderComplete: i + lat,
+      oooIssue: Math.floor(i / 2),
+      oooComplete: Math.floor(i / 2) + lat,
+      idealIssue: Math.floor(i / 4),
+      idealComplete: Math.floor(i / 4) + lat,
+    });
+  }
+
+  // Build realistic dependencies
+  const dependencies = [];
+  const lastWriter = {};
+  const lastReaders = {};
+  for (let i = 0; i < N; i++) {
+    const instr = instructions[i];
+    for (const r of instr.srcRegs) {
+      if (lastWriter[r] !== undefined && lastWriter[r] !== i) {
+        dependencies.push({ from: lastWriter[r], to: i, type: 'RAW', register: r });
+      }
+      if (!lastReaders[r]) lastReaders[r] = [];
+      lastReaders[r].push(i);
+    }
+    for (const r of instr.dstRegs) {
+      if (lastWriter[r] !== undefined && lastWriter[r] !== i)
+        dependencies.push({ from: lastWriter[r], to: i, type: 'WAW', register: r });
+      if (lastReaders[r]) {
+        for (const rd of lastReaders[r]) {
+          if (rd !== i) dependencies.push({ from: rd, to: i, type: 'WAR', register: r });
+        }
+        lastReaders[r] = [];
+      }
+      lastWriter[r] = i;
+    }
+  }
+
+  // Timeline (ideal)
+  const maxCycle = Math.max(...instructions.map(i => i.idealComplete));
+  const timeline = [];
+  for (let c = 0; c <= maxCycle; c++) {
+    timeline.push({
+      cycle: c,
+      issued: instructions.filter(i => i.idealIssue === c).map(i => i.order),
+      completed: instructions.filter(i => i.idealComplete === c).map(i => i.order),
+      inFlight: instructions.filter(i => i.idealIssue < c && i.idealComplete > c).map(i => i.order),
+    });
+  }
+
+  // Histogram
+  const histogram = {};
+  for (const state of timeline) {
+    const p = state.inFlight.length + state.issued.length;
+    histogram[p] = (histogram[p] || 0) + 1;
+  }
+
+  const rawCount = dependencies.filter(d => d.type === 'RAW').length;
+  const warCount = dependencies.filter(d => d.type === 'WAR').length;
+  const wawCount = dependencies.filter(d => d.type === 'WAW').length;
+  const criticalPath = [0,3,8,14,22,31,40,50,58];
+  const inOrderCycles = instructions[N-1].inOrderComplete;
+  const oooCycles = Math.max(...instructions.map(i => i.oooComplete));
+  const idealCycles = Math.max(...instructions.map(i => i.idealComplete));
+
+  return {
+    summary: {
+      totalInstructions: N,
+      totalDependencies: dependencies.length,
+      rawCount, warCount, wawCount,
+      dependencyDensity: dependencies.length / (N*(N-1)/2),
+      criticalPathLength: 18,
+      theoreticalILP: +(N / 18).toFixed(2),
+      inOrderILP: +(N / inOrderCycles).toFixed(2),
+      outOfOrderILP: +(N / oooCycles).toFixed(2),
+      idealILP: +(N / idealCycles).toFixed(2),
+    },
+    instructions,
+    dependencies,
+    criticalPath,
+    timeline,
+    parallelismHistogram: histogram,
+  };
+}
+
+function loadSampleData() {
+  analysisData = generateSampleData();
+  document.getElementById('fileStatus').textContent = 'sample_trace.json';
+  displayResults();
+}
+
+// ─────────────────────────────────────────────
+// Display
+// ─────────────────────────────────────────────
+function displayResults() {
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('analysisUI').style.display = 'block';
+  document.getElementById('statsPanel').style.display = 'block';
+
+  updateSidebar();
+  renderTimeline();
+  renderInstructionTable();
+  // Graph & histogram render on tab switch (needs width)
+}
+
+function updateSidebar() {
+  const s = analysisData.summary;
+  document.getElementById('totalInstructions').textContent = s.totalInstructions;
+  document.getElementById('criticalPathLength').textContent = s.criticalPathLength;
+  document.getElementById('totalDependencies').textContent = s.totalDependencies;
+  document.getElementById('rawCount').textContent = s.rawCount;
+  document.getElementById('warCount').textContent = s.warCount;
+  document.getElementById('wawCount').textContent = s.wawCount;
+  document.getElementById('theoreticalILP').textContent = s.theoreticalILP.toFixed(2);
+  document.getElementById('inOrderILP').textContent = s.inOrderILP.toFixed(2);
+  document.getElementById('outOfOrderILP').textContent = s.outOfOrderILP.toFixed(2);
+  document.getElementById('idealILP').textContent = s.idealILP.toFixed(2);
+
+  // ILP bars
+  const maxILP = Math.max(s.inOrderILP, s.outOfOrderILP, s.idealILP, 0.01);
+  document.getElementById('inOrderBar').style.width = (s.inOrderILP / maxILP * 100) + '%';
+  document.getElementById('oooBar').style.width = (s.outOfOrderILP / maxILP * 100) + '%';
+  document.getElementById('idealBar').style.width = (s.idealILP / maxILP * 100) + '%';
+
+  // Instruction mix
+  const mix = {};
+  for (const instr of analysisData.instructions) {
+    mix[instr.type] = (mix[instr.type] || 0) + 1;
+  }
+  const total = analysisData.instructions.length;
+  const mixEl = document.getElementById('instrMix');
+  mixEl.innerHTML = '';
+  const typeColors = { ALU:'#7ba3ff', LOAD:'#3ecf8e', STORE:'#f59e0b', BRANCH:'#e879a0', FPU:'#a78bfa', LOOP:'#38c6c0', CTRL:'#f87171' };
+  Object.entries(mix).sort((a,b) => b[1]-a[1]).forEach(([type, count]) => {
+    const pct = Math.round(count / total * 100);
+    const color = typeColors[type] || '#8b92b0';
+    mixEl.innerHTML += `
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px">
+        <div style="width:6px;height:6px;border-radius:50%;background:${color};flex-shrink:0"></div>
+        <span style="color:var(--text2);flex:1">${type}</span>
+        <span style="color:var(--text3);font-family:var(--mono)">${count}</span>
+        <span style="color:var(--text3);width:32px;text-align:right;font-family:var(--mono)">${pct}%</span>
+      </div>
+    `;
+  });
+}
+
+// ─────────────────────────────────────────────
+// Timeline
+// ─────────────────────────────────────────────
+function renderTimeline() {
+  if (!analysisData) return;
+  const container = document.getElementById('timelineContainer');
+  const scheduleType = document.getElementById('scheduleType').value;
+  const maxInstr = parseInt(document.getElementById('maxInstrDisplay').value) || 50;
+
+  let issueField, completeField;
+  switch (scheduleType) {
+    case 'inOrder': issueField = 'inOrderIssue'; completeField = 'inOrderComplete'; break;
+    case 'ooo':     issueField = 'oooIssue';     completeField = 'oooComplete';     break;
+    default:        issueField = 'idealIssue';   completeField = 'idealComplete';
+  }
+
+  const instrs = analysisData.instructions.slice(0, maxInstr);
+  if (instrs.length === 0) { container.innerHTML = '<div style="color:var(--text3);padding:20px">No instructions</div>'; return; }
+
+  const maxCycle = Math.max(...instrs.map(i => i[completeField] || 0));
+  const cycleW = 36;
+  const rowH = 22;
+  const labelW = 52;
+  const svgW = labelW + (maxCycle + 2) * cycleW;
+  const svgH = instrs.length * rowH + 40;
+
+  const typeColors = {
+    ALU:'#5b8af5', LOAD:'#3ecf8e', STORE:'#f59e0b',
+    BRANCH:'#e879a0', FPU:'#a78bfa', LOOP:'#38c6c0', CTRL:'#f87171'
+  };
+
+  let svg = `<svg width="${svgW}" height="${svgH}" style="display:block">`;
+
+  // Cycle headers + grid lines
+  for (let c = 0; c <= maxCycle + 1; c++) {
+    const x = labelW + c * cycleW;
+    svg += `<text x="${x + cycleW/2}" y="12" text-anchor="middle" font-size="9" fill="#555c7a" font-family="JetBrains Mono,monospace">${c}</text>`;
+    svg += `<line x1="${x}" y1="18" x2="${x}" y2="${svgH}" stroke="#2a2f45" stroke-width="1"/>`;
+  }
+
+  // Instruction bars
+  instrs.forEach((instr, idx) => {
+    const y = 22 + idx * rowH;
+    const issue = instr[issueField] || 0;
+    const complete = instr[completeField] || issue + 1;
+    const barW = Math.max((complete - issue) * cycleW - 2, cycleW - 2);
+    const color = typeColors[instr.type] || '#8b92b0';
+    const isOnCritical = (analysisData.criticalPath || []).includes(idx);
+
+    // Row label
+    svg += `<text x="${labelW - 4}" y="${y + rowH/2 + 4}" text-anchor="end" font-size="9" fill="#555c7a" font-family="JetBrains Mono,monospace">I${instr.order}</text>`;
+
+    // Bar
+    svg += `<rect class="timeline-bar" x="${labelW + issue * cycleW + 1}" y="${y + 2}"
+      width="${barW}" height="${rowH - 4}" rx="3"
+      fill="${color}" fill-opacity="${isOnCritical ? 1 : 0.7}"
+      stroke="${isOnCritical ? '#3ecf8e' : 'none'}" stroke-width="${isOnCritical ? 1.5 : 0}"
+      data-instr="${instr.order}" data-issue="${issue}" data-complete="${complete}"
+      style="cursor:pointer">
+      <title>I${instr.order}: ${instr.disasm}\nType: ${instr.type}\nIssue: ${issue} → Complete: ${complete}</title>
+    </rect>`;
+
+    // Type label on bar if wide enough
+    if (barW > 28) {
+      svg += `<text x="${labelW + issue * cycleW + 5}" y="${y + rowH/2 + 4}" font-size="8" fill="white" font-family="JetBrains Mono,monospace" pointer-events="none">${instr.type}</text>`;
+    }
+  });
+
+  svg += '</svg>';
+  container.innerHTML = svg;
+
+  // Tooltip on bars
+  const tooltip = document.getElementById('tooltip');
+  container.querySelectorAll('.timeline-bar').forEach(bar => {
+    bar.addEventListener('mousemove', e => {
+      const idx = parseInt(bar.dataset.instr);
+      const instr = analysisData.instructions[idx];
+      if (!instr) return;
+      tooltip.innerHTML = `<strong style="color:var(--accent2)">I${instr.order}</strong>: ${instr.disasm}<br>
+        <span style="color:var(--text3)">Type: </span>${instr.type} &nbsp;
+        <span style="color:var(--text3)">Latency: </span>${instr.latency}<br>
+        <span style="color:var(--text3)">Cycle: </span>${bar.dataset.issue} → ${bar.dataset.complete}`;
+      tooltip.classList.add('show');
+      tooltip.style.left = (e.clientX + 12) + 'px';
+      tooltip.style.top = (e.clientY - 10) + 'px';
+    });
+    bar.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
+  });
+
+  updateCycleInfo(0);
+}
+
+let playActive = false;
+function togglePlay() {
+  if (playActive) {
+    playActive = false;
+    clearTimeout(timelineTimer);
+    document.getElementById('playTimeline').textContent = '▶ Play';
+  } else {
+    playActive = true;
+    document.getElementById('playTimeline').textContent = '⏸ Pause';
+    animateCycle();
+  }
+}
+
+function animateCycle() {
+  if (!playActive) return;
+  const timeline = analysisData.timeline || [];
+  if (currentCycleIdx >= timeline.length) {
+    playActive = false;
+    document.getElementById('playTimeline').textContent = '▶ Play';
+    return;
+  }
+  updateCycleInfo(currentCycleIdx);
+  highlightCycle(currentCycleIdx);
+  currentCycleIdx++;
+  timelineTimer = setTimeout(animateCycle, 400);
+}
+
+function resetTimeline() {
+  playActive = false;
+  clearTimeout(timelineTimer);
+  currentCycleIdx = 0;
+  document.getElementById('playTimeline').textContent = '▶ Play';
+  updateCycleInfo(0);
+  // Reset bar styles
+  document.querySelectorAll('.timeline-bar').forEach(b => { b.style.opacity = ''; });
+}
+
+function highlightCycle(cycleIdx) {
+  const timeline = analysisData.timeline || [];
+  if (cycleIdx >= timeline.length) return;
+  const state = timeline[cycleIdx];
+  const issuedSet = new Set(state.issued || []);
+  const inFlightSet = new Set(state.inFlight || []);
+  const completedSet = new Set(state.completed || []);
+
+  document.querySelectorAll('.timeline-bar').forEach(bar => {
+    const id = parseInt(bar.dataset.instr);
+    const issue = parseInt(bar.dataset.issue);
+    const complete = parseInt(bar.dataset.complete);
+    if (issuedSet.has(id)) { bar.style.opacity = '1'; bar.style.filter = 'brightness(1.3)'; }
+    else if (issue <= cycleIdx && complete > cycleIdx) { bar.style.opacity = '0.8'; bar.style.filter = ''; }
+    else if (complete <= cycleIdx) { bar.style.opacity = '0.3'; bar.style.filter = ''; }
+    else { bar.style.opacity = '0.15'; bar.style.filter = ''; }
+  });
+}
+
+function updateCycleInfo(cycleIdx) {
+  const timeline = analysisData.timeline || [];
+  if (cycleIdx >= timeline.length) {
+    document.getElementById('currentCycle').textContent = cycleIdx;
+    return;
+  }
+  const state = timeline[cycleIdx];
+  document.getElementById('currentCycle').textContent = state.cycle;
+  document.getElementById('issuedCount').textContent = (state.issued || []).length;
+  document.getElementById('inFlightCount').textContent = (state.inFlight || []).length;
+  document.getElementById('completedCount').textContent = (state.completed || []).length;
+}
+
+// ─────────────────────────────────────────────
+// Dependency Graph (D3)
+// ─────────────────────────────────────────────
+function renderDependencyGraph() {
+  if (!analysisData) return;
+  const container = document.getElementById('graphContainer');
+  container.innerHTML = '';
+
+  const showRAW = document.getElementById('showRAW').checked;
+  const showWAR = document.getElementById('showWAR').checked;
+  const showWAW = document.getElementById('showWAW').checked;
+  const instrCount = parseInt(document.getElementById('graphInstrCount').value) || 30;
+
+  const width = container.clientWidth || 700;
+  const height = 500;
+
+  const svg = d3.select(container)
+    .append('svg')
+    .attr('width', width)
+    .attr('height', height);
+
+  // Defs: arrow markers per dep type
+  const defs = svg.append('defs');
+  [['RAW','#f87171'],['WAR','#f59e0b'],['WAW','#a78bfa']].forEach(([type, color]) => {
+    defs.append('marker')
+      .attr('id', `arrow-${type}`)
+      .attr('viewBox','0 -5 10 10')
+      .attr('refX', 22).attr('refY', 0)
+      .attr('markerWidth', 5).attr('markerHeight', 5)
+      .attr('orient','auto')
+      .append('path')
+      .attr('fill', color)
+      .attr('d','M0,-5L10,0L0,5');
+  });
+
+  const criticalSet = new Set(analysisData.criticalPath || []);
+  const instructions = analysisData.instructions.slice(0, instrCount);
+
+  const deps = (analysisData.dependencies || []).filter(d => {
+    const from = d.from !== undefined ? d.from : d.fromInstr;
+    const to = d.to !== undefined ? d.to : d.toInstr;
+    return from < instrCount && to < instrCount &&
+      ((d.type === 'RAW' && showRAW) ||
+       (d.type === 'WAR' && showWAR) ||
+       (d.type === 'WAW' && showWAW));
+  });
+
+  const nodes = instructions.map((instr, i) => ({
+    id: i, instr,
+    isCritical: criticalSet.has(i),
+  }));
+
+  const links = deps.map(d => ({
+    source: d.from !== undefined ? d.from : d.fromInstr,
+    target: d.to !== undefined ? d.to : d.toInstr,
+    type: d.type,
+  })).filter(l => l.source < nodes.length && l.target < nodes.length);
+
+  const typeColors = {
+    ALU:'#5b8af5', LOAD:'#3ecf8e', STORE:'#f59e0b',
+    BRANCH:'#e879a0', FPU:'#a78bfa', LOOP:'#38c6c0', CTRL:'#f87171'
+  };
+
+  const simulation = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(55))
+    .force('charge', d3.forceManyBody().strength(-120))
+    .force('x', d3.forceX(d => (d.id / instrCount) * (width - 80) + 40).strength(0.6))
+    .force('y', d3.forceY(height / 2).strength(0.1))
+    .force('collision', d3.forceCollide().radius(18));
+
+  const link = svg.append('g')
+    .selectAll('line')
+    .data(links).enter().append('line')
+    .attr('class', d => `link ${d.type.toLowerCase()}`)
+    .attr('marker-end', d => `url(#arrow-${d.type})`);
+
+  const node = svg.append('g')
+    .selectAll('g')
+    .data(nodes).enter().append('g')
+    .attr('class', d => `node${d.isCritical ? ' critical' : ''}`)
+    .call(d3.drag()
+      .on('start', (e, d) => { if (!e.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+      .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+      .on('end', (e, d) => { if (!e.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; }));
+
+  node.append('circle')
+    .attr('r', 14)
+    .attr('fill', d => typeColors[d.instr.type] || '#8b92b0')
+    .attr('fill-opacity', 0.85)
+    .attr('stroke', d => d.isCritical ? '#3ecf8e' : '#141720')
+    .attr('stroke-width', d => d.isCritical ? 2.5 : 1.5);
+
+  node.append('text')
+    .attr('dy', 4).attr('text-anchor', 'middle')
+    .attr('fill', 'white').attr('font-size', 9)
+    .attr('font-family', 'JetBrains Mono,monospace')
+    .text(d => d.id);
+
+  node.append('title')
+    .text(d => `I${d.id}: ${d.instr.disasm}\nType: ${d.instr.type}\nLatency: ${d.instr.latency}${d.isCritical ? '\n★ Critical path' : ''}`);
+
+  simulation.on('tick', () => {
+    link
+      .attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('transform', d => `translate(${Math.max(16, Math.min(width-16, d.x))},${Math.max(16, Math.min(height-16, d.y))})`);
+  });
+}
+
+// ─────────────────────────────────────────────
+// Instruction Table
+// ─────────────────────────────────────────────
+function renderInstructionTable() {
+  if (!analysisData) return;
+  const tbody = document.getElementById('instructionBody');
+  tbody.innerHTML = '';
+
+  analysisData.instructions.forEach(instr => {
+    const row = document.createElement('tr');
+    const type = (instr.type || 'other').toLowerCase();
+    row.dataset.type = instr.type || '';
+    row.dataset.disasm = (instr.disasm || '').toLowerCase();
+    row.dataset.addr = (instr.address || '').toLowerCase();
+    row.innerHTML = `
+      <td>${instr.order}</td>
+      <td><code>${instr.address || '—'}</code></td>
+      <td><code style="color:var(--text)">${instr.disasm || '—'}</code></td>
+      <td><span class="badge ${type}">${instr.type || '?'}</span></td>
+      <td style="font-family:var(--mono);font-size:11px;color:var(--text3)">${(instr.srcRegs||[]).join(', ') || '—'}</td>
+      <td style="font-family:var(--mono);font-size:11px;color:var(--text3)">${(instr.dstRegs||[]).join(', ') || '—'}</td>
+      <td style="font-family:var(--mono)">${instr.latency ?? '—'}</td>
+      <td style="font-family:var(--mono);color:var(--text3)">${instr.inOrderIssue ?? '—'}</td>
+      <td style="font-family:var(--mono);color:var(--amber)">${instr.oooIssue ?? '—'}</td>
+      <td style="font-family:var(--mono);color:var(--green)">${instr.idealIssue ?? '—'}</td>
+      <td style="font-family:var(--mono);color:var(--accent2)">${instr.idealComplete ?? '—'}</td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  updateInstrCount();
+}
+
+function filterInstructions() {
+  const search = document.getElementById('instrSearch').value.toLowerCase();
+  const typeFilter = document.getElementById('instrTypeFilter').value;
+  let visible = 0;
+
+  document.querySelectorAll('#instructionBody tr').forEach(row => {
+    const matchSearch = !search ||
+      row.dataset.disasm.includes(search) ||
+      row.dataset.addr.includes(search) ||
+      (row.dataset.type || '').toLowerCase().includes(search);
+    const matchType = typeFilter === 'all' || row.dataset.type === typeFilter;
+    row.style.display = (matchSearch && matchType) ? '' : 'none';
+    if (matchSearch && matchType) visible++;
+  });
+
+  document.getElementById('instrCount').textContent = `${visible} / ${analysisData.instructions.length} shown`;
+}
+
+function updateInstrCount() {
+  document.getElementById('instrCount').textContent = `${analysisData.instructions.length} instructions`;
+}
+
+// ─────────────────────────────────────────────
+// Histogram (D3)
+// ─────────────────────────────────────────────
+function renderHistogram() {
+  if (!analysisData) return;
+  const container = document.getElementById('histogramContainer');
+  container.innerHTML = '';
+
+  const histogram = analysisData.parallelismHistogram || {};
+  if (Object.keys(histogram).length === 0) {
+    container.innerHTML = '<div style="color:var(--text3);padding:20px">No histogram data</div>';
+    return;
+  }
+
+  const data = Object.entries(histogram)
+    .map(([k, v]) => ({ parallelism: +k, count: +v }))
+    .sort((a, b) => a.parallelism - b.parallelism);
+
+  const margin = { top: 16, right: 24, bottom: 48, left: 48 };
+  const width = (container.clientWidth || 600) - margin.left - margin.right;
+  const height = 280 - margin.top - margin.bottom;
+
+  const svg = d3.select(container).append('svg')
+    .attr('width', width + margin.left + margin.right)
+    .attr('height', height + margin.top + margin.bottom)
+    .append('g')
+    .attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand()
+    .domain(data.map(d => d.parallelism))
+    .range([0, width]).padding(0.25);
+
+  const y = d3.scaleLinear()
+    .domain([0, d3.max(data, d => d.count)]).nice()
+    .range([height, 0]);
+
+  // Gradient fill for bars
+  const color = d3.scaleLinear()
+    .domain([d3.min(data, d => d.parallelism), d3.max(data, d => d.parallelism)])
+    .range(['#3b6fdb', '#3ecf8e']);
+
+  // Grid lines
+  svg.append('g').attr('class', 'grid')
+    .call(d3.axisLeft(y).ticks(5).tickSize(-width).tickFormat(''))
+    .selectAll('line').attr('stroke', '#2a2f45').attr('stroke-dasharray', '3,3');
+  svg.select('.grid .domain').remove();
+
+  // Bars
+  svg.selectAll('rect').data(data).enter().append('rect')
+    .attr('x', d => x(d.parallelism))
+    .attr('y', d => y(d.count))
+    .attr('width', x.bandwidth())
+    .attr('height', d => height - y(d.count))
+    .attr('fill', d => color(d.parallelism))
+    .attr('rx', 4)
+    .attr('fill-opacity', 0.85);
+
+  // Value labels on bars
+  svg.selectAll('.bar-label').data(data).enter().append('text')
+    .attr('class','bar-label')
+    .attr('x', d => x(d.parallelism) + x.bandwidth()/2)
+    .attr('y', d => y(d.count) - 4)
+    .attr('text-anchor','middle')
+    .attr('font-size', 10).attr('fill', '#8b92b0')
+    .attr('font-family','JetBrains Mono,monospace')
+    .text(d => d.count);
+
+  // X axis
+  svg.append('g').attr('transform', `translate(0,${height})`)
+    .call(d3.axisBottom(x).tickSize(0))
+    .call(g => g.select('.domain').attr('stroke', '#2a2f45'))
+    .call(g => g.selectAll('text').attr('fill','#555c7a').attr('font-size',11).attr('dy',12));
+
+  svg.append('text')
+    .attr('x', width/2).attr('y', height + 42)
+    .attr('text-anchor','middle')
+    .attr('font-size',11).attr('fill','#555c7a')
+    .text('Instructions in parallel per cycle');
+
+  // Y axis
+  svg.append('g')
+    .call(d3.axisLeft(y).ticks(5).tickSize(0))
+    .call(g => g.select('.domain').attr('stroke','#2a2f45'))
+    .call(g => g.selectAll('text').attr('fill','#555c7a').attr('font-size',11).attr('dx',-4));
+
+  svg.append('text')
+    .attr('transform','rotate(-90)')
+    .attr('x', -height/2).attr('y', -36)
+    .attr('text-anchor','middle')
+    .attr('font-size',11).attr('fill','#555c7a')
+    .text('Cycle count');
+
+  // Stats
+  const peak = Math.max(...data.map(d => d.parallelism));
+  const totalCycles = data.reduce((s, d) => s + d.count, 0);
+  const avg = data.reduce((s, d) => s + d.parallelism * d.count, 0) / totalCycles;
+
+  document.getElementById('peakParallelism').textContent = peak;
+  document.getElementById('avgParallelism').textContent = avg.toFixed(2);
+  document.getElementById('totalCycles').textContent = totalCycles;
+}
+</script>
+</body>
+</html>
