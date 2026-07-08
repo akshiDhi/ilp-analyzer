@@ -1,0 +1,13 @@
+{
+  "total_instructions": 336429,
+  "critical_path_cycles": 1,
+  "theoretical_ilp": 336429.0000,
+  "hw_reorder_ilp": 336429.0000,
+  "sw_reorder_ilp": 3.9756,
+  "raw_count": 552590,
+  "war_count": 341471,
+  "waw_count": 410967,
+  "mem_dep_count": 120118,
+  "dependency_density": 3.8791,
+  "max_parallelism": 336429
+}

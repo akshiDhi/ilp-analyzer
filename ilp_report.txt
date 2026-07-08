@@ -1,0 +1,63 @@
+=================================================================
+ ILP ANALYZER — FULL ANALYSIS REPORT
+ Project: Instruction Level Parallelism (ILP) Analyzer
+ Authors: Akshita Dhiman (2024CSB1098), Saloni Mahajan (2024CSB1149)
+=================================================================
+
+Input Trace  : ../pintool/trace.out
+Analysis Date: Tue May 12 11:24:55 2026
+Max Records  : 1000000
+Mem Tracking : ON
+SW Window    : 64 instructions
+SW Issue W   : 4 instructions/cycle
+
+-----------------------------------------------------------------
+ INSTRUCTION COUNTS
+-----------------------------------------------------------------
+Total Dynamic Instructions  : 336429
+
+-----------------------------------------------------------------
+ DEPENDENCY ANALYSIS
+-----------------------------------------------------------------
+RAW (Read After Write) deps  : 552590  [TRUE DEPENDENCIES — limit ILP]
+WAR (Write After Read) deps  : 341471  [ANTI-DEPS — can be eliminated by renaming]
+WAW (Write After Write) deps : 410967  [OUTPUT DEPS — can be eliminated by renaming]
+Memory-based dependencies    : 120118
+Total edges in dep graph     : 1305028
+Dependency density (e/n)     : 3.879
+
+-----------------------------------------------------------------
+ ILP ESTIMATION
+-----------------------------------------------------------------
+Formula: ILP = Total Instructions / Critical Path Length (cycles)
+
+Critical Path Length         : 1 cycles
+Theoretical ILP              : 336429.000
+
+Hardware Reordering (OOO):
+  Model: Infinite ROB, infinite functional units,
+         only RAW deps limit parallelism
+  Total cycles                 : 1
+  ILP (HW model)              : 336429.000
+  Max instructions in 1 cycle : 336429
+
+Software Reordering (Compiler Scheduling):
+  Model: List scheduler, window=64, issue_width=4
+         Ideal register renaming (WAR/WAW eliminated)
+  Total cycles                 : 84623
+  ILP (SW model)              : 3.976
+
+-----------------------------------------------------------------
+ INTERPRETATION
+-----------------------------------------------------------------
+SW ILP / HW ILP ratio: 0.0% of theoretical achieved by compiler scheduling
+=> HIGH ILP: Good instruction-level parallelism. OOO CPU beneficial.
+
+-----------------------------------------------------------------
+ HW SCHEDULE — CYCLE HISTOGRAM (first 50 cycles)
+-----------------------------------------------------------------
+Cycle    0: ████████████████████████████████████████████████████████████████████████████████ (336429 ins)
+
+=================================================================
+ END OF REPORT
+=================================================================

@@ -39,7 +39,6 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.5; min-height: 100vh; }
 
-
 .shell { display: grid; grid-template-rows: auto 1fr; min-height: 100vh; }
 .topbar {
   background: var(--surface);
@@ -63,7 +62,6 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); line
 }
 .content { overflow: auto; }
 
-
 .upload-zone {
   border: 1.5px dashed var(--border2);
   border-radius: var(--radius-lg);
@@ -79,7 +77,6 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); line
 .upload-zone strong { color: var(--text); font-size: 13px; }
 #jsonFile { display: none; }
 
-
 .btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 8px 14px; border-radius: var(--radius);
@@ -92,11 +89,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); line
 .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
 .btn-sm { padding: 5px 10px; font-size: 12px; }
 .btn-full { width: 100%; justify-content: center; }
-.btn-icon { padding: 6px; }
-
 
 .sidebar-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); margin-top: 4px; }
-
 
 .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .stat-card {
@@ -113,7 +107,6 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); line
 .dep-pill.war { background: rgba(245,158,11,0.15); color: var(--war); }
 .dep-pill.waw { background: rgba(167,139,250,0.15); color: var(--waw); }
 
-
 .ilp-section { display: flex; flex-direction: column; gap: 8px; }
 .ilp-row { display: flex; flex-direction: column; gap: 4px; }
 .ilp-row-head { display: flex; justify-content: space-between; align-items: center; }
@@ -124,7 +117,6 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); line
 .ilp-fill.inorder { background: var(--text3); }
 .ilp-fill.ooo { background: var(--amber); }
 .ilp-fill.ideal { background: var(--green); }
-
 
 .tab-bar {
   display: flex; gap: 0; border-bottom: 1px solid var(--border);
@@ -137,12 +129,11 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); line
   border-bottom: 2px solid transparent; margin-bottom: -1px;
   transition: color 0.15s, border-color 0.15s;
 }
-.tab-btn:hover { color: var(--text); background: none; }
+.tab-btn:hover { color: var(--text); }
 .tab-btn.active { color: var(--accent2); border-bottom-color: var(--accent); }
 
 .tab-panel { display: none; padding: 24px; }
 .tab-panel.active { display: block; }
-
 
 .ctrl-row {
   display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
@@ -160,7 +151,6 @@ input[type="number"] { width: 80px; }
 input[type="text"] { min-width: 200px; }
 input[type="checkbox"] { accent-color: var(--accent); }
 
-
 .timeline-wrap { overflow-x: auto; background: var(--surface2); border-radius: var(--radius-lg); border: 1px solid var(--border); }
 .cycle-bar {
   display: flex; gap: 20px; padding: 12px 16px;
@@ -170,11 +160,9 @@ input[type="checkbox"] { accent-color: var(--accent); }
 }
 .cycle-bar strong { color: var(--accent2); font-family: var(--mono); }
 
-
 .graph-wrap { background: var(--surface2); border-radius: var(--radius-lg); border: 1px solid var(--border); min-height: 500px; }
 .graph-legend { display: flex; gap: 20px; flex-wrap: wrap; padding: 12px 16px; border-top: 1px solid var(--border); font-size: 12px; }
 .legend-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
-
 
 .tbl-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-lg); }
 table { width: 100%; border-collapse: collapse; font-size: 12px; }
@@ -203,12 +191,10 @@ code { font-family: var(--mono); font-size: 11px; color: var(--text); }
 .badge.ctrl { background: rgba(248,113,113,0.15); color: var(--red); }
 .badge.other { background: rgba(139,146,176,0.15); color: var(--text2); }
 
-
 .hist-wrap { background: var(--surface2); border-radius: var(--radius-lg); border: 1px solid var(--border); padding: 20px; }
 .hist-stats { display: flex; gap: 24px; margin-top: 16px; font-size: 13px; }
 .hist-stat span { color: var(--text3); }
 .hist-stat strong { color: var(--accent2); font-family: var(--mono); }
-
 
 .empty-state {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -216,7 +202,6 @@ code { font-family: var(--mono); font-size: 11px; color: var(--text); }
 }
 .empty-state .big-icon { font-size: 48px; opacity: 0.3; }
 .empty-state p { font-size: 14px; }
-
 
 .tooltip {
   position: fixed; pointer-events: none;
@@ -227,7 +212,6 @@ code { font-family: var(--mono); font-size: 11px; color: var(--text); }
 }
 .tooltip.show { display: block; }
 
-
 .link { fill: none; stroke-width: 1.5px; opacity: 0.5; }
 .link.raw { stroke: var(--raw); }
 .link.war { stroke: var(--war); }
@@ -236,11 +220,9 @@ code { font-family: var(--mono); font-size: 11px; color: var(--text); }
 .node text { font-size: 10px; font-family: var(--mono); font-weight: 500; }
 .node.critical circle { stroke: var(--critical) !important; stroke-width: 2.5px; }
 
-
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
-
 
 @media (max-width: 900px) {
   .main { grid-template-columns: 1fr; }
@@ -259,7 +241,6 @@ code { font-family: var(--mono); font-size: 11px; color: var(--text); }
   </div>
 
   <div class="main">
-    <!-- Sidebar -->
     <div class="sidebar">
       <div>
         <div class="sidebar-label" style="margin-bottom:8px">Input</div>
@@ -269,9 +250,14 @@ code { font-family: var(--mono); font-size: 11px; color: var(--text); }
           <p style="margin-top:4px">or click to browse</p>
         </div>
         <input type="file" id="jsonFile" accept=".json">
-        <button class="btn btn-full" onclick="loadSampleData()" style="margin-top:8px">
-          ⚡ Load Sample Trace
-        </button>
+        <div style="margin-top:12px">
+          <div class="sidebar-label" style="margin-bottom:8px">Sample Traces</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <button class="btn btn-full" onclick="loadSampleData('alu')">🧮 Matrix Multiply (ALU)</button>
+            <button class="btn btn-full" onclick="loadSampleData('mem')">💾 Memory Scan (Load-heavy)</button>
+            <button class="btn btn-full" onclick="loadSampleData('loop')">🔄 Tight Loop (High IPC)</button>
+          </div>
+        </div>
       </div>
 
       <div id="statsPanel" style="display:none">
@@ -329,7 +315,6 @@ code { font-family: var(--mono); font-size: 11px; color: var(--text); }
         <div class="sidebar-label" style="margin-top:12px;margin-bottom:8px">Instruction Mix</div>
         <div id="instrMix" style="display:flex;flex-direction:column;gap:4px"></div>
       </div>
-
       <div style="flex:1"></div>
       <div style="font-size:10px;color:var(--text3);font-family:var(--mono)">
         Load a PIN-tool JSON trace or use sample data.
@@ -338,16 +323,14 @@ code { font-family: var(--mono); font-size: 11px; color: var(--text); }
       </div>
     </div>
 
-    <!-- Main content -->
     <div class="content" id="mainContent">
       <div class="empty-state" id="emptyState">
         <div class="big-icon">⚙</div>
-        <p>Load a trace file or click <strong style="color:var(--accent2)">"Load Sample Trace"</strong> to get started</p>
+        <p>Load a trace file or choose a <strong style="color:var(--accent2)">Sample Trace</strong> from the sidebar to get started</p>
         <p style="font-size:12px;margin-top:4px">Analyzes instruction-level parallelism, dependencies, and scheduling</p>
       </div>
 
       <div id="analysisUI" style="display:none">
-        <!-- Tab bar -->
         <div class="tab-bar">
           <button class="tab-btn active" data-tab="timeline">Timeline</button>
           <button class="tab-btn" data-tab="dependency">Dependency Graph</button>
@@ -355,7 +338,6 @@ code { font-family: var(--mono); font-size: 11px; color: var(--text); }
           <button class="tab-btn" data-tab="histogram">Parallelism Dist.</button>
         </div>
 
-        <!-- Timeline tab -->
         <div class="tab-panel active" id="timeline">
           <div class="ctrl-row">
             <div class="ctrl-group">
@@ -385,7 +367,6 @@ code { font-family: var(--mono); font-size: 11px; color: var(--text); }
           </div>
         </div>
 
-        <!-- Dependency graph tab -->
         <div class="tab-panel" id="dependency">
           <div class="ctrl-row">
             <label class="ctrl-group">
@@ -416,7 +397,6 @@ code { font-family: var(--mono); font-size: 11px; color: var(--text); }
           </div>
         </div>
 
-        <!-- Instructions tab -->
         <div class="tab-panel" id="instructions">
           <div class="ctrl-row">
             <input type="text" id="instrSearch" placeholder="Search disasm, address, type…">
@@ -457,7 +437,6 @@ code { font-family: var(--mono); font-size: 11px; color: var(--text); }
           </div>
         </div>
 
-        <!-- Histogram tab -->
         <div class="tab-panel" id="histogram">
           <div class="hist-wrap">
             <div id="histogramContainer" style="min-height:300px"></div>
@@ -476,18 +455,13 @@ code { font-family: var(--mono); font-size: 11px; color: var(--text); }
 <div class="tooltip" id="tooltip"></div>
 
 <script>
-// ─────────────────────────────────────────────
 // State
-// ─────────────────────────────────────────────
 let analysisData = null;
 let timelineTimer = null;
 let currentCycleIdx = 0;
 
-// ─────────────────────────────────────────────
 // Init
-// ─────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  // File input
   document.getElementById('jsonFile').addEventListener('change', e => {
     const f = e.target.files[0];
     if (!f) return;
@@ -504,7 +478,6 @@ document.addEventListener('DOMContentLoaded', () => {
     reader.readAsText(f);
   });
 
-  // Drag and drop
   const dz = document.getElementById('dropZone');
   dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag'); });
   dz.addEventListener('dragleave', () => dz.classList.remove('drag'));
@@ -523,41 +496,47 @@ document.addEventListener('DOMContentLoaded', () => {
     reader.readAsText(f);
   });
 
-  // Tabs
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const tab = btn.dataset.tab;
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b === btn));
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === tab));
-      // Re-render D3 panels on show (they need proper dimensions)
       if (tab === 'dependency') renderDependencyGraph();
       if (tab === 'histogram') renderHistogram();
     });
   });
 
-  // Timeline controls
   document.getElementById('scheduleType').addEventListener('change', renderTimeline);
   document.getElementById('maxInstrDisplay').addEventListener('change', renderTimeline);
   document.getElementById('playTimeline').addEventListener('click', togglePlay);
   document.getElementById('resetTimeline').addEventListener('click', resetTimeline);
 
-  // Graph controls
   document.getElementById('refreshGraph').addEventListener('click', renderDependencyGraph);
   document.getElementById('showRAW').addEventListener('change', renderDependencyGraph);
   document.getElementById('showWAR').addEventListener('change', renderDependencyGraph);
   document.getElementById('showWAW').addEventListener('change', renderDependencyGraph);
   document.getElementById('graphInstrCount').addEventListener('change', renderDependencyGraph);
 
-  // Instruction table controls
   document.getElementById('instrSearch').addEventListener('input', filterInstructions);
   document.getElementById('instrTypeFilter').addEventListener('change', filterInstructions);
 });
 
-// ─────────────────────────────────────────────
-// Sample data generator
-// ─────────────────────────────────────────────
-function generateSampleData() {
-  const types = ['ALU','LOAD','STORE','BRANCH','ALU','ALU','FPU','LOOP','ALU','CTRL'];
+function generateSampleData(traceType = 'alu') {
+  let N, types, oooFactor, idealFactor;
+  if (traceType === 'alu') {
+    N = 80;
+    types = ['ALU','ALU','ALU','LOAD','ALU','FPU','FPU','STORE'];
+    oooFactor = 1.5; idealFactor = 2.5;
+  } else if (traceType === 'mem') {
+    N = 100;
+    types = ['LOAD','LOAD','ALU','STORE','LOAD','ALU','LOAD','BRANCH'];
+    oooFactor = 1.2; idealFactor = 1.8;
+  } else {
+    N = 120;
+    types = ['ALU','ALU','FPU','ALU','LOOP','CTRL'];
+    oooFactor = 2.0; idealFactor = 4.0;
+  }
+
   const regs = ['RAX','RBX','RCX','RDX','RSI','RDI','R8','R9','R10','R11','XMM0','XMM1'];
   const mnemonics = {
     ALU: ['add','sub','and','or','xor','shl','imul','lea'],
@@ -570,15 +549,18 @@ function generateSampleData() {
   };
 
   const instructions = [];
-  const N = 60;
   for (let i = 0; i < N; i++) {
     const type = types[i % types.length];
     const mn = mnemonics[type] || ['nop'];
     const mnemonic = mn[Math.floor(Math.random() * mn.length)];
     const srcRegs = [regs[Math.floor(Math.random() * regs.length)]];
     if (Math.random() > 0.4) srcRegs.push(regs[Math.floor(Math.random() * regs.length)]);
-    const dstRegs = type === 'STORE' || type === 'CTRL' ? [] : [regs[Math.floor(Math.random() * regs.length)]];
+    const dstRegs = (type === 'STORE' || type === 'CTRL' || type === 'BRANCH') ? [] : [regs[Math.floor(Math.random() * regs.length)]];
     const lat = type === 'LOAD' ? 4 : type === 'FPU' ? 5 : type === 'STORE' ? 2 : type === 'BRANCH' ? 1 : type === 'LOOP' ? 1 : 1;
+
+    let inOrderIss = i * 1.5 + Math.random() * 2;
+    let oooIss = i / oooFactor + Math.random() * 1.5;
+    let idealIss = i / idealFactor;
 
     instructions.push({
       order: i,
@@ -588,16 +570,15 @@ function generateSampleData() {
       srcRegs,
       dstRegs,
       latency: lat,
-      inOrderIssue: i,
-      inOrderComplete: i + lat,
-      oooIssue: Math.floor(i / 2),
-      oooComplete: Math.floor(i / 2) + lat,
-      idealIssue: Math.floor(i / 4),
-      idealComplete: Math.floor(i / 4) + lat,
+      inOrderIssue: Math.floor(inOrderIss),
+      inOrderComplete: Math.floor(inOrderIss) + lat,
+      oooIssue: Math.floor(oooIss),
+      oooComplete: Math.floor(oooIss) + lat,
+      idealIssue: Math.floor(idealIss),
+      idealComplete: Math.floor(idealIss) + lat,
     });
   }
 
-  // Build realistic dependencies
   const dependencies = [];
   const lastWriter = {};
   const lastReaders = {};
@@ -623,7 +604,6 @@ function generateSampleData() {
     }
   }
 
-  // Timeline (ideal)
   const maxCycle = Math.max(...instructions.map(i => i.idealComplete));
   const timeline = [];
   for (let c = 0; c <= maxCycle; c++) {
@@ -635,7 +615,6 @@ function generateSampleData() {
     });
   }
 
-  // Histogram
   const histogram = {};
   for (const state of timeline) {
     const p = state.inFlight.length + state.issued.length;
@@ -645,22 +624,28 @@ function generateSampleData() {
   const rawCount = dependencies.filter(d => d.type === 'RAW').length;
   const warCount = dependencies.filter(d => d.type === 'WAR').length;
   const wawCount = dependencies.filter(d => d.type === 'WAW').length;
-  const criticalPath = [0,3,8,14,22,31,40,50,58];
-  const inOrderCycles = instructions[N-1].inOrderComplete;
+  const criticalPath = [0, Math.floor(N*0.1), Math.floor(N*0.3), Math.floor(N*0.5), Math.floor(N*0.8), N-1];
+  
+  const inOrderCycles = Math.max(...instructions.map(i => i.inOrderComplete));
   const oooCycles = Math.max(...instructions.map(i => i.oooComplete));
   const idealCycles = Math.max(...instructions.map(i => i.idealComplete));
+
+  const theoreticalILP = idealCycles > 0 ? +(N / (idealCycles * 0.8)).toFixed(2) : 1;
+  const inOrderILP = inOrderCycles > 0 ? +(N / inOrderCycles).toFixed(2) : 1;
+  const outOfOrderILP = oooCycles > 0 ? +(N / oooCycles).toFixed(2) : 1;
+  const idealILP = idealCycles > 0 ? +(N / idealCycles).toFixed(2) : 1;
 
   return {
     summary: {
       totalInstructions: N,
       totalDependencies: dependencies.length,
       rawCount, warCount, wawCount,
-      dependencyDensity: dependencies.length / (N*(N-1)/2),
-      criticalPathLength: 18,
-      theoreticalILP: +(N / 18).toFixed(2),
-      inOrderILP: +(N / inOrderCycles).toFixed(2),
-      outOfOrderILP: +(N / oooCycles).toFixed(2),
-      idealILP: +(N / idealCycles).toFixed(2),
+      dependencyDensity: +(dependencies.length / (N*(N-1)/2)).toFixed(4),
+      criticalPathLength: Math.floor(idealCycles * 0.8),
+      theoreticalILP,
+      inOrderILP,
+      outOfOrderILP,
+      idealILP,
     },
     instructions,
     dependencies,
@@ -670,15 +655,13 @@ function generateSampleData() {
   };
 }
 
-function loadSampleData() {
-  analysisData = generateSampleData();
-  document.getElementById('fileStatus').textContent = 'sample_trace.json';
+function loadSampleData(type = 'alu') {
+  analysisData = generateSampleData(type);
+  const names = { alu: 'matrix_mult.json', mem: 'memory_scan.json', loop: 'tight_loop.json' };
+  document.getElementById('fileStatus').textContent = names[type] || 'sample.json';
   displayResults();
 }
 
-// ─────────────────────────────────────────────
-// Display
-// ─────────────────────────────────────────────
 function displayResults() {
   document.getElementById('emptyState').style.display = 'none';
   document.getElementById('analysisUI').style.display = 'block';
@@ -687,7 +670,13 @@ function displayResults() {
   updateSidebar();
   renderTimeline();
   renderInstructionTable();
-  // Graph & histogram render on tab switch (needs width)
+  
+  // Also re-render D3 charts if they are currently visible
+  const activeTab = document.querySelector('.tab-btn.active');
+  if (activeTab) {
+    if (activeTab.dataset.tab === 'dependency') renderDependencyGraph();
+    if (activeTab.dataset.tab === 'histogram') renderHistogram();
+  }
 }
 
 function updateSidebar() {
@@ -703,13 +692,11 @@ function updateSidebar() {
   document.getElementById('outOfOrderILP').textContent = s.outOfOrderILP.toFixed(2);
   document.getElementById('idealILP').textContent = s.idealILP.toFixed(2);
 
-  // ILP bars
   const maxILP = Math.max(s.inOrderILP, s.outOfOrderILP, s.idealILP, 0.01);
   document.getElementById('inOrderBar').style.width = (s.inOrderILP / maxILP * 100) + '%';
   document.getElementById('oooBar').style.width = (s.outOfOrderILP / maxILP * 100) + '%';
   document.getElementById('idealBar').style.width = (s.idealILP / maxILP * 100) + '%';
 
-  // Instruction mix
   const mix = {};
   for (const instr of analysisData.instructions) {
     mix[instr.type] = (mix[instr.type] || 0) + 1;
@@ -732,9 +719,6 @@ function updateSidebar() {
   });
 }
 
-// ─────────────────────────────────────────────
-// Timeline
-// ─────────────────────────────────────────────
 function renderTimeline() {
   if (!analysisData) return;
   const container = document.getElementById('timelineContainer');
@@ -765,14 +749,12 @@ function renderTimeline() {
 
   let svg = `<svg width="${svgW}" height="${svgH}" style="display:block">`;
 
-  // Cycle headers + grid lines
   for (let c = 0; c <= maxCycle + 1; c++) {
     const x = labelW + c * cycleW;
     svg += `<text x="${x + cycleW/2}" y="12" text-anchor="middle" font-size="9" fill="#555c7a" font-family="JetBrains Mono,monospace">${c}</text>`;
     svg += `<line x1="${x}" y1="18" x2="${x}" y2="${svgH}" stroke="#2a2f45" stroke-width="1"/>`;
   }
 
-  // Instruction bars
   instrs.forEach((instr, idx) => {
     const y = 22 + idx * rowH;
     const issue = instr[issueField] || 0;
@@ -781,10 +763,8 @@ function renderTimeline() {
     const color = typeColors[instr.type] || '#8b92b0';
     const isOnCritical = (analysisData.criticalPath || []).includes(idx);
 
-    // Row label
     svg += `<text x="${labelW - 4}" y="${y + rowH/2 + 4}" text-anchor="end" font-size="9" fill="#555c7a" font-family="JetBrains Mono,monospace">I${instr.order}</text>`;
 
-    // Bar
     svg += `<rect class="timeline-bar" x="${labelW + issue * cycleW + 1}" y="${y + 2}"
       width="${barW}" height="${rowH - 4}" rx="3"
       fill="${color}" fill-opacity="${isOnCritical ? 1 : 0.7}"
@@ -794,7 +774,6 @@ function renderTimeline() {
       <title>I${instr.order}: ${instr.disasm}\nType: ${instr.type}\nIssue: ${issue} → Complete: ${complete}</title>
     </rect>`;
 
-    // Type label on bar if wide enough
     if (barW > 28) {
       svg += `<text x="${labelW + issue * cycleW + 5}" y="${y + rowH/2 + 4}" font-size="8" fill="white" font-family="JetBrains Mono,monospace" pointer-events="none">${instr.type}</text>`;
     }
@@ -803,7 +782,6 @@ function renderTimeline() {
   svg += '</svg>';
   container.innerHTML = svg;
 
-  // Tooltip on bars
   const tooltip = document.getElementById('tooltip');
   container.querySelectorAll('.timeline-bar').forEach(bar => {
     bar.addEventListener('mousemove', e => {
@@ -857,7 +835,6 @@ function resetTimeline() {
   currentCycleIdx = 0;
   document.getElementById('playTimeline').textContent = '▶ Play';
   updateCycleInfo(0);
-  // Reset bar styles
   document.querySelectorAll('.timeline-bar').forEach(b => { b.style.opacity = ''; });
 }
 
@@ -893,9 +870,6 @@ function updateCycleInfo(cycleIdx) {
   document.getElementById('completedCount').textContent = (state.completed || []).length;
 }
 
-// ─────────────────────────────────────────────
-// Dependency Graph (D3)
-// ─────────────────────────────────────────────
 function renderDependencyGraph() {
   if (!analysisData) return;
   const container = document.getElementById('graphContainer');
@@ -914,7 +888,6 @@ function renderDependencyGraph() {
     .attr('width', width)
     .attr('height', height);
 
-  // Defs: arrow markers per dep type
   const defs = svg.append('defs');
   [['RAW','#f87171'],['WAR','#f59e0b'],['WAW','#a78bfa']].forEach(([type, color]) => {
     defs.append('marker')
@@ -1002,9 +975,6 @@ function renderDependencyGraph() {
   });
 }
 
-// ─────────────────────────────────────────────
-// Instruction Table
-// ─────────────────────────────────────────────
 function renderInstructionTable() {
   if (!analysisData) return;
   const tbody = document.getElementById('instructionBody');
@@ -1057,9 +1027,6 @@ function updateInstrCount() {
   document.getElementById('instrCount').textContent = `${analysisData.instructions.length} instructions`;
 }
 
-// ─────────────────────────────────────────────
-// Histogram (D3)
-// ─────────────────────────────────────────────
 function renderHistogram() {
   if (!analysisData) return;
   const container = document.getElementById('histogramContainer');
@@ -1089,22 +1056,21 @@ function renderHistogram() {
     .domain(data.map(d => d.parallelism))
     .range([0, width]).padding(0.25);
 
+  const maxCount = d3.max(data, d => d.count);
   const y = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.count)]).nice()
+    .domain([0, maxCount * 1.2]) // 20% padding to prevent truncation
+    .nice()
     .range([height, 0]);
 
-  // Gradient fill for bars
   const color = d3.scaleLinear()
     .domain([d3.min(data, d => d.parallelism), d3.max(data, d => d.parallelism)])
     .range(['#3b6fdb', '#3ecf8e']);
 
-  // Grid lines
   svg.append('g').attr('class', 'grid')
     .call(d3.axisLeft(y).ticks(5).tickSize(-width).tickFormat(''))
     .selectAll('line').attr('stroke', '#2a2f45').attr('stroke-dasharray', '3,3');
   svg.select('.grid .domain').remove();
 
-  // Bars
   svg.selectAll('rect').data(data).enter().append('rect')
     .attr('x', d => x(d.parallelism))
     .attr('y', d => y(d.count))
@@ -1114,7 +1080,6 @@ function renderHistogram() {
     .attr('rx', 4)
     .attr('fill-opacity', 0.85);
 
-  // Value labels on bars
   svg.selectAll('.bar-label').data(data).enter().append('text')
     .attr('class','bar-label')
     .attr('x', d => x(d.parallelism) + x.bandwidth()/2)
@@ -1124,7 +1089,6 @@ function renderHistogram() {
     .attr('font-family','JetBrains Mono,monospace')
     .text(d => d.count);
 
-  // X axis
   svg.append('g').attr('transform', `translate(0,${height})`)
     .call(d3.axisBottom(x).tickSize(0))
     .call(g => g.select('.domain').attr('stroke', '#2a2f45'))
@@ -1136,7 +1100,6 @@ function renderHistogram() {
     .attr('font-size',11).attr('fill','#555c7a')
     .text('Instructions in parallel per cycle');
 
-  // Y axis
   svg.append('g')
     .call(d3.axisLeft(y).ticks(5).tickSize(0))
     .call(g => g.select('.domain').attr('stroke','#2a2f45'))
@@ -1149,7 +1112,6 @@ function renderHistogram() {
     .attr('font-size',11).attr('fill','#555c7a')
     .text('Cycle count');
 
-  // Stats
   const peak = Math.max(...data.map(d => d.parallelism));
   const totalCycles = data.reduce((s, d) => s + d.count, 0);
   const avg = data.reduce((s, d) => s + d.parallelism * d.count, 0) / totalCycles;

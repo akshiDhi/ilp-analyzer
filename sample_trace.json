@@ -1,0 +1,4731 @@
+{
+  "summary": {
+    "totalInstructions": 100,
+    "totalDependencies": 320,
+    "rawCount": 133,
+    "warCount": 124,
+    "wawCount": 63,
+    "dependencyDensity": 0.0646,
+    "criticalPathLength": 45,
+    "theoreticalILP": 2.19,
+    "inOrderILP": 0.66,
+    "outOfOrderILP": 1.16,
+    "idealILP": 1.75
+  },
+  "instructions": [
+    {
+      "order": 0,
+      "address": "0x400000",
+      "disasm": "mov RSI, RDX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RDX"
+      ],
+      "dstRegs": [
+        "RSI"
+      ],
+      "latency": 4,
+      "inOrderIssue": 1,
+      "inOrderComplete": 5,
+      "oooIssue": 1,
+      "oooComplete": 5,
+      "idealIssue": 0,
+      "idealComplete": 4
+    },
+    {
+      "order": 1,
+      "address": "0x400004",
+      "disasm": "movsx RCX, RAX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RAX"
+      ],
+      "dstRegs": [
+        "RCX"
+      ],
+      "latency": 4,
+      "inOrderIssue": 2,
+      "inOrderComplete": 6,
+      "oooIssue": 1,
+      "oooComplete": 5,
+      "idealIssue": 0,
+      "idealComplete": 4
+    },
+    {
+      "order": 2,
+      "address": "0x400008",
+      "disasm": "or RAX, R9, XMM1",
+      "type": "ALU",
+      "srcRegs": [
+        "R9",
+        "XMM1"
+      ],
+      "dstRegs": [
+        "RAX"
+      ],
+      "latency": 1,
+      "inOrderIssue": 4,
+      "inOrderComplete": 5,
+      "oooIssue": 3,
+      "oooComplete": 4,
+      "idealIssue": 1,
+      "idealComplete": 2
+    },
+    {
+      "order": 3,
+      "address": "0x40000c",
+      "disasm": "push RBX",
+      "type": "STORE",
+      "srcRegs": [
+        "RBX"
+      ],
+      "dstRegs": [],
+      "latency": 2,
+      "inOrderIssue": 5,
+      "inOrderComplete": 7,
+      "oooIssue": 2,
+      "oooComplete": 4,
+      "idealIssue": 1,
+      "idealComplete": 3
+    },
+    {
+      "order": 4,
+      "address": "0x400010",
+      "disasm": "movzx XMM1, R9, RBX",
+      "type": "LOAD",
+      "srcRegs": [
+        "R9",
+        "RBX"
+      ],
+      "dstRegs": [
+        "XMM1"
+      ],
+      "latency": 4,
+      "inOrderIssue": 6,
+      "inOrderComplete": 10,
+      "oooIssue": 4,
+      "oooComplete": 8,
+      "idealIssue": 2,
+      "idealComplete": 6
+    },
+    {
+      "order": 5,
+      "address": "0x400014",
+      "disasm": "lea RDX, R10",
+      "type": "ALU",
+      "srcRegs": [
+        "R10"
+      ],
+      "dstRegs": [
+        "RDX"
+      ],
+      "latency": 1,
+      "inOrderIssue": 8,
+      "inOrderComplete": 9,
+      "oooIssue": 5,
+      "oooComplete": 6,
+      "idealIssue": 2,
+      "idealComplete": 3
+    },
+    {
+      "order": 6,
+      "address": "0x400018",
+      "disasm": "movsx R9, R9",
+      "type": "LOAD",
+      "srcRegs": [
+        "R9"
+      ],
+      "dstRegs": [
+        "R9"
+      ],
+      "latency": 4,
+      "inOrderIssue": 10,
+      "inOrderComplete": 14,
+      "oooIssue": 6,
+      "oooComplete": 10,
+      "idealIssue": 3,
+      "idealComplete": 7
+    },
+    {
+      "order": 7,
+      "address": "0x40001c",
+      "disasm": "jg RAX, RCX",
+      "type": "BRANCH",
+      "srcRegs": [
+        "RAX",
+        "RCX"
+      ],
+      "dstRegs": [],
+      "latency": 1,
+      "inOrderIssue": 10,
+      "inOrderComplete": 11,
+      "oooIssue": 7,
+      "oooComplete": 8,
+      "idealIssue": 3,
+      "idealComplete": 4
+    },
+    {
+      "order": 8,
+      "address": "0x400020",
+      "disasm": "mov XMM1, R8, RDX",
+      "type": "LOAD",
+      "srcRegs": [
+        "R8",
+        "RDX"
+      ],
+      "dstRegs": [
+        "XMM1"
+      ],
+      "latency": 4,
+      "inOrderIssue": 13,
+      "inOrderComplete": 17,
+      "oooIssue": 7,
+      "oooComplete": 11,
+      "idealIssue": 4,
+      "idealComplete": 8
+    },
+    {
+      "order": 9,
+      "address": "0x400024",
+      "disasm": "movsx R11, RAX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RAX"
+      ],
+      "dstRegs": [
+        "R11"
+      ],
+      "latency": 4,
+      "inOrderIssue": 15,
+      "inOrderComplete": 19,
+      "oooIssue": 8,
+      "oooComplete": 12,
+      "idealIssue": 5,
+      "idealComplete": 9
+    },
+    {
+      "order": 10,
+      "address": "0x400028",
+      "disasm": "lea RSI, R10",
+      "type": "ALU",
+      "srcRegs": [
+        "R10"
+      ],
+      "dstRegs": [
+        "RSI"
+      ],
+      "latency": 1,
+      "inOrderIssue": 16,
+      "inOrderComplete": 17,
+      "oooIssue": 9,
+      "oooComplete": 10,
+      "idealIssue": 5,
+      "idealComplete": 6
+    },
+    {
+      "order": 11,
+      "address": "0x40002c",
+      "disasm": "movdqu RDI, R9",
+      "type": "STORE",
+      "srcRegs": [
+        "RDI",
+        "R9"
+      ],
+      "dstRegs": [],
+      "latency": 2,
+      "inOrderIssue": 16,
+      "inOrderComplete": 18,
+      "oooIssue": 10,
+      "oooComplete": 12,
+      "idealIssue": 6,
+      "idealComplete": 8
+    },
+    {
+      "order": 12,
+      "address": "0x400030",
+      "disasm": "movsx RSI, R9",
+      "type": "LOAD",
+      "srcRegs": [
+        "R9"
+      ],
+      "dstRegs": [
+        "RSI"
+      ],
+      "latency": 4,
+      "inOrderIssue": 18,
+      "inOrderComplete": 22,
+      "oooIssue": 11,
+      "oooComplete": 15,
+      "idealIssue": 6,
+      "idealComplete": 10
+    },
+    {
+      "order": 13,
+      "address": "0x400034",
+      "disasm": "or RAX, R11",
+      "type": "ALU",
+      "srcRegs": [
+        "R11"
+      ],
+      "dstRegs": [
+        "RAX"
+      ],
+      "latency": 1,
+      "inOrderIssue": 20,
+      "inOrderComplete": 21,
+      "oooIssue": 11,
+      "oooComplete": 12,
+      "idealIssue": 7,
+      "idealComplete": 8
+    },
+    {
+      "order": 14,
+      "address": "0x400038",
+      "disasm": "mov RDX, RSI",
+      "type": "LOAD",
+      "srcRegs": [
+        "RSI"
+      ],
+      "dstRegs": [
+        "RDX"
+      ],
+      "latency": 4,
+      "inOrderIssue": 22,
+      "inOrderComplete": 26,
+      "oooIssue": 12,
+      "oooComplete": 16,
+      "idealIssue": 7,
+      "idealComplete": 11
+    },
+    {
+      "order": 15,
+      "address": "0x40003c",
+      "disasm": "jl RCX, RDX",
+      "type": "BRANCH",
+      "srcRegs": [
+        "RCX",
+        "RDX"
+      ],
+      "dstRegs": [],
+      "latency": 1,
+      "inOrderIssue": 24,
+      "inOrderComplete": 25,
+      "oooIssue": 13,
+      "oooComplete": 14,
+      "idealIssue": 8,
+      "idealComplete": 9
+    },
+    {
+      "order": 16,
+      "address": "0x400040",
+      "disasm": "movsx RDI, RSI, R9",
+      "type": "LOAD",
+      "srcRegs": [
+        "RSI",
+        "R9"
+      ],
+      "dstRegs": [
+        "RDI"
+      ],
+      "latency": 4,
+      "inOrderIssue": 24,
+      "inOrderComplete": 28,
+      "oooIssue": 13,
+      "oooComplete": 17,
+      "idealIssue": 8,
+      "idealComplete": 12
+    },
+    {
+      "order": 17,
+      "address": "0x400044",
+      "disasm": "movzx RBX, R9",
+      "type": "LOAD",
+      "srcRegs": [
+        "R9"
+      ],
+      "dstRegs": [
+        "RBX"
+      ],
+      "latency": 4,
+      "inOrderIssue": 27,
+      "inOrderComplete": 31,
+      "oooIssue": 15,
+      "oooComplete": 19,
+      "idealIssue": 9,
+      "idealComplete": 13
+    },
+    {
+      "order": 18,
+      "address": "0x400048",
+      "disasm": "and RAX, RCX, RCX",
+      "type": "ALU",
+      "srcRegs": [
+        "RCX",
+        "RCX"
+      ],
+      "dstRegs": [
+        "RAX"
+      ],
+      "latency": 1,
+      "inOrderIssue": 28,
+      "inOrderComplete": 29,
+      "oooIssue": 15,
+      "oooComplete": 16,
+      "idealIssue": 10,
+      "idealComplete": 11
+    },
+    {
+      "order": 19,
+      "address": "0x40004c",
+      "disasm": "push RDI, R8",
+      "type": "STORE",
+      "srcRegs": [
+        "RDI",
+        "R8"
+      ],
+      "dstRegs": [],
+      "latency": 2,
+      "inOrderIssue": 29,
+      "inOrderComplete": 31,
+      "oooIssue": 17,
+      "oooComplete": 19,
+      "idealIssue": 10,
+      "idealComplete": 12
+    },
+    {
+      "order": 20,
+      "address": "0x400050",
+      "disasm": "mov RDI, R9, RAX",
+      "type": "LOAD",
+      "srcRegs": [
+        "R9",
+        "RAX"
+      ],
+      "dstRegs": [
+        "RDI"
+      ],
+      "latency": 4,
+      "inOrderIssue": 30,
+      "inOrderComplete": 34,
+      "oooIssue": 16,
+      "oooComplete": 20,
+      "idealIssue": 11,
+      "idealComplete": 15
+    },
+    {
+      "order": 21,
+      "address": "0x400054",
+      "disasm": "add XMM0, RSI",
+      "type": "ALU",
+      "srcRegs": [
+        "RSI"
+      ],
+      "dstRegs": [
+        "XMM0"
+      ],
+      "latency": 1,
+      "inOrderIssue": 32,
+      "inOrderComplete": 33,
+      "oooIssue": 17,
+      "oooComplete": 18,
+      "idealIssue": 11,
+      "idealComplete": 12
+    },
+    {
+      "order": 22,
+      "address": "0x400058",
+      "disasm": "movzx RAX, RSI",
+      "type": "LOAD",
+      "srcRegs": [
+        "RSI"
+      ],
+      "dstRegs": [
+        "RAX"
+      ],
+      "latency": 4,
+      "inOrderIssue": 33,
+      "inOrderComplete": 37,
+      "oooIssue": 19,
+      "oooComplete": 23,
+      "idealIssue": 12,
+      "idealComplete": 16
+    },
+    {
+      "order": 23,
+      "address": "0x40005c",
+      "disasm": "jl RSI, RCX",
+      "type": "BRANCH",
+      "srcRegs": [
+        "RSI",
+        "RCX"
+      ],
+      "dstRegs": [],
+      "latency": 1,
+      "inOrderIssue": 36,
+      "inOrderComplete": 37,
+      "oooIssue": 20,
+      "oooComplete": 21,
+      "idealIssue": 12,
+      "idealComplete": 13
+    },
+    {
+      "order": 24,
+      "address": "0x400060",
+      "disasm": "movsx RDI, RSI, XMM0",
+      "type": "LOAD",
+      "srcRegs": [
+        "RSI",
+        "XMM0"
+      ],
+      "dstRegs": [
+        "RDI"
+      ],
+      "latency": 4,
+      "inOrderIssue": 36,
+      "inOrderComplete": 40,
+      "oooIssue": 20,
+      "oooComplete": 24,
+      "idealIssue": 13,
+      "idealComplete": 17
+    },
+    {
+      "order": 25,
+      "address": "0x400064",
+      "disasm": "movzx XMM1, RAX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RAX"
+      ],
+      "dstRegs": [
+        "XMM1"
+      ],
+      "latency": 4,
+      "inOrderIssue": 38,
+      "inOrderComplete": 42,
+      "oooIssue": 21,
+      "oooComplete": 25,
+      "idealIssue": 13,
+      "idealComplete": 17
+    },
+    {
+      "order": 26,
+      "address": "0x400068",
+      "disasm": "shl R10, RCX, R9",
+      "type": "ALU",
+      "srcRegs": [
+        "RCX",
+        "R9"
+      ],
+      "dstRegs": [
+        "R10"
+      ],
+      "latency": 1,
+      "inOrderIssue": 40,
+      "inOrderComplete": 41,
+      "oooIssue": 22,
+      "oooComplete": 23,
+      "idealIssue": 14,
+      "idealComplete": 15
+    },
+    {
+      "order": 27,
+      "address": "0x40006c",
+      "disasm": "push RDX, RDI",
+      "type": "STORE",
+      "srcRegs": [
+        "RDX",
+        "RDI"
+      ],
+      "dstRegs": [],
+      "latency": 2,
+      "inOrderIssue": 41,
+      "inOrderComplete": 43,
+      "oooIssue": 23,
+      "oooComplete": 25,
+      "idealIssue": 15,
+      "idealComplete": 17
+    },
+    {
+      "order": 28,
+      "address": "0x400070",
+      "disasm": "mov R11, R11, R9",
+      "type": "LOAD",
+      "srcRegs": [
+        "R11",
+        "R9"
+      ],
+      "dstRegs": [
+        "R11"
+      ],
+      "latency": 4,
+      "inOrderIssue": 43,
+      "inOrderComplete": 47,
+      "oooIssue": 23,
+      "oooComplete": 27,
+      "idealIssue": 15,
+      "idealComplete": 19
+    },
+    {
+      "order": 29,
+      "address": "0x400074",
+      "disasm": "and XMM1, R10",
+      "type": "ALU",
+      "srcRegs": [
+        "R10"
+      ],
+      "dstRegs": [
+        "XMM1"
+      ],
+      "latency": 1,
+      "inOrderIssue": 44,
+      "inOrderComplete": 45,
+      "oooIssue": 24,
+      "oooComplete": 25,
+      "idealIssue": 16,
+      "idealComplete": 17
+    },
+    {
+      "order": 30,
+      "address": "0x400078",
+      "disasm": "mov R9, R8",
+      "type": "LOAD",
+      "srcRegs": [
+        "R8"
+      ],
+      "dstRegs": [
+        "R9"
+      ],
+      "latency": 4,
+      "inOrderIssue": 46,
+      "inOrderComplete": 50,
+      "oooIssue": 25,
+      "oooComplete": 29,
+      "idealIssue": 16,
+      "idealComplete": 20
+    },
+    {
+      "order": 31,
+      "address": "0x40007c",
+      "disasm": "jne R8, R11",
+      "type": "BRANCH",
+      "srcRegs": [
+        "R8",
+        "R11"
+      ],
+      "dstRegs": [],
+      "latency": 1,
+      "inOrderIssue": 46,
+      "inOrderComplete": 47,
+      "oooIssue": 26,
+      "oooComplete": 27,
+      "idealIssue": 17,
+      "idealComplete": 18
+    },
+    {
+      "order": 32,
+      "address": "0x400080",
+      "disasm": "movsx RBX, R8",
+      "type": "LOAD",
+      "srcRegs": [
+        "R8"
+      ],
+      "dstRegs": [
+        "RBX"
+      ],
+      "latency": 4,
+      "inOrderIssue": 49,
+      "inOrderComplete": 53,
+      "oooIssue": 26,
+      "oooComplete": 30,
+      "idealIssue": 17,
+      "idealComplete": 21
+    },
+    {
+      "order": 33,
+      "address": "0x400084",
+      "disasm": "movzx XMM1, RBX, RDX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RBX",
+        "RDX"
+      ],
+      "dstRegs": [
+        "XMM1"
+      ],
+      "latency": 4,
+      "inOrderIssue": 50,
+      "inOrderComplete": 54,
+      "oooIssue": 28,
+      "oooComplete": 32,
+      "idealIssue": 18,
+      "idealComplete": 22
+    },
+    {
+      "order": 34,
+      "address": "0x400088",
+      "disasm": "xor RDI, RDX",
+      "type": "ALU",
+      "srcRegs": [
+        "RDX"
+      ],
+      "dstRegs": [
+        "RDI"
+      ],
+      "latency": 1,
+      "inOrderIssue": 51,
+      "inOrderComplete": 52,
+      "oooIssue": 28,
+      "oooComplete": 29,
+      "idealIssue": 18,
+      "idealComplete": 19
+    },
+    {
+      "order": 35,
+      "address": "0x40008c",
+      "disasm": "push R8, RSI",
+      "type": "STORE",
+      "srcRegs": [
+        "R8",
+        "RSI"
+      ],
+      "dstRegs": [],
+      "latency": 2,
+      "inOrderIssue": 53,
+      "inOrderComplete": 55,
+      "oooIssue": 30,
+      "oooComplete": 32,
+      "idealIssue": 19,
+      "idealComplete": 21
+    },
+    {
+      "order": 36,
+      "address": "0x400090",
+      "disasm": "movzx RSI, RSI",
+      "type": "LOAD",
+      "srcRegs": [
+        "RSI"
+      ],
+      "dstRegs": [
+        "RSI"
+      ],
+      "latency": 4,
+      "inOrderIssue": 54,
+      "inOrderComplete": 58,
+      "oooIssue": 31,
+      "oooComplete": 35,
+      "idealIssue": 20,
+      "idealComplete": 24
+    },
+    {
+      "order": 37,
+      "address": "0x400094",
+      "disasm": "sub XMM1, RSI",
+      "type": "ALU",
+      "srcRegs": [
+        "RSI"
+      ],
+      "dstRegs": [
+        "XMM1"
+      ],
+      "latency": 1,
+      "inOrderIssue": 56,
+      "inOrderComplete": 57,
+      "oooIssue": 31,
+      "oooComplete": 32,
+      "idealIssue": 20,
+      "idealComplete": 21
+    },
+    {
+      "order": 38,
+      "address": "0x400098",
+      "disasm": "movsx XMM1, RCX, R10",
+      "type": "LOAD",
+      "srcRegs": [
+        "RCX",
+        "R10"
+      ],
+      "dstRegs": [
+        "XMM1"
+      ],
+      "latency": 4,
+      "inOrderIssue": 58,
+      "inOrderComplete": 62,
+      "oooIssue": 31,
+      "oooComplete": 35,
+      "idealIssue": 21,
+      "idealComplete": 25
+    },
+    {
+      "order": 39,
+      "address": "0x40009c",
+      "disasm": "je RAX, RDI",
+      "type": "BRANCH",
+      "srcRegs": [
+        "RAX",
+        "RDI"
+      ],
+      "dstRegs": [],
+      "latency": 1,
+      "inOrderIssue": 59,
+      "inOrderComplete": 60,
+      "oooIssue": 32,
+      "oooComplete": 33,
+      "idealIssue": 21,
+      "idealComplete": 22
+    },
+    {
+      "order": 40,
+      "address": "0x4000a0",
+      "disasm": "movsx R11, RDI, RBX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RDI",
+        "RBX"
+      ],
+      "dstRegs": [
+        "R11"
+      ],
+      "latency": 4,
+      "inOrderIssue": 61,
+      "inOrderComplete": 65,
+      "oooIssue": 33,
+      "oooComplete": 37,
+      "idealIssue": 22,
+      "idealComplete": 26
+    },
+    {
+      "order": 41,
+      "address": "0x4000a4",
+      "disasm": "mov XMM0, R11, RBX",
+      "type": "LOAD",
+      "srcRegs": [
+        "R11",
+        "RBX"
+      ],
+      "dstRegs": [
+        "XMM0"
+      ],
+      "latency": 4,
+      "inOrderIssue": 62,
+      "inOrderComplete": 66,
+      "oooIssue": 34,
+      "oooComplete": 38,
+      "idealIssue": 22,
+      "idealComplete": 26
+    },
+    {
+      "order": 42,
+      "address": "0x4000a8",
+      "disasm": "or R8, R11",
+      "type": "ALU",
+      "srcRegs": [
+        "R11"
+      ],
+      "dstRegs": [
+        "R8"
+      ],
+      "latency": 1,
+      "inOrderIssue": 63,
+      "inOrderComplete": 64,
+      "oooIssue": 35,
+      "oooComplete": 36,
+      "idealIssue": 23,
+      "idealComplete": 24
+    },
+    {
+      "order": 43,
+      "address": "0x4000ac",
+      "disasm": "mov XMM0, R11",
+      "type": "STORE",
+      "srcRegs": [
+        "XMM0",
+        "R11"
+      ],
+      "dstRegs": [],
+      "latency": 2,
+      "inOrderIssue": 65,
+      "inOrderComplete": 67,
+      "oooIssue": 36,
+      "oooComplete": 38,
+      "idealIssue": 23,
+      "idealComplete": 25
+    },
+    {
+      "order": 44,
+      "address": "0x4000b0",
+      "disasm": "mov XMM1, XMM1, XMM0",
+      "type": "LOAD",
+      "srcRegs": [
+        "XMM1",
+        "XMM0"
+      ],
+      "dstRegs": [
+        "XMM1"
+      ],
+      "latency": 4,
+      "inOrderIssue": 66,
+      "inOrderComplete": 70,
+      "oooIssue": 38,
+      "oooComplete": 42,
+      "idealIssue": 24,
+      "idealComplete": 28
+    },
+    {
+      "order": 45,
+      "address": "0x4000b4",
+      "disasm": "add RDI, RCX",
+      "type": "ALU",
+      "srcRegs": [
+        "RCX"
+      ],
+      "dstRegs": [
+        "RDI"
+      ],
+      "latency": 1,
+      "inOrderIssue": 68,
+      "inOrderComplete": 69,
+      "oooIssue": 38,
+      "oooComplete": 39,
+      "idealIssue": 25,
+      "idealComplete": 26
+    },
+    {
+      "order": 46,
+      "address": "0x4000b8",
+      "disasm": "movzx R11, RDX, RCX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RDX",
+        "RCX"
+      ],
+      "dstRegs": [
+        "R11"
+      ],
+      "latency": 4,
+      "inOrderIssue": 69,
+      "inOrderComplete": 73,
+      "oooIssue": 39,
+      "oooComplete": 43,
+      "idealIssue": 25,
+      "idealComplete": 29
+    },
+    {
+      "order": 47,
+      "address": "0x4000bc",
+      "disasm": "jne RSI, XMM1",
+      "type": "BRANCH",
+      "srcRegs": [
+        "RSI",
+        "XMM1"
+      ],
+      "dstRegs": [],
+      "latency": 1,
+      "inOrderIssue": 71,
+      "inOrderComplete": 72,
+      "oooIssue": 39,
+      "oooComplete": 40,
+      "idealIssue": 26,
+      "idealComplete": 27
+    },
+    {
+      "order": 48,
+      "address": "0x4000c0",
+      "disasm": "movsx R8, R11",
+      "type": "LOAD",
+      "srcRegs": [
+        "R11"
+      ],
+      "dstRegs": [
+        "R8"
+      ],
+      "latency": 4,
+      "inOrderIssue": 72,
+      "inOrderComplete": 76,
+      "oooIssue": 40,
+      "oooComplete": 44,
+      "idealIssue": 26,
+      "idealComplete": 30
+    },
+    {
+      "order": 49,
+      "address": "0x4000c4",
+      "disasm": "movzx R11, RSI, R9",
+      "type": "LOAD",
+      "srcRegs": [
+        "RSI",
+        "R9"
+      ],
+      "dstRegs": [
+        "R11"
+      ],
+      "latency": 4,
+      "inOrderIssue": 75,
+      "inOrderComplete": 79,
+      "oooIssue": 41,
+      "oooComplete": 45,
+      "idealIssue": 27,
+      "idealComplete": 31
+    },
+    {
+      "order": 50,
+      "address": "0x4000c8",
+      "disasm": "and RDX, R11, R9",
+      "type": "ALU",
+      "srcRegs": [
+        "R11",
+        "R9"
+      ],
+      "dstRegs": [
+        "RDX"
+      ],
+      "latency": 1,
+      "inOrderIssue": 76,
+      "inOrderComplete": 77,
+      "oooIssue": 42,
+      "oooComplete": 43,
+      "idealIssue": 27,
+      "idealComplete": 28
+    },
+    {
+      "order": 51,
+      "address": "0x4000cc",
+      "disasm": "mov RDX",
+      "type": "STORE",
+      "srcRegs": [
+        "RDX"
+      ],
+      "dstRegs": [],
+      "latency": 2,
+      "inOrderIssue": 77,
+      "inOrderComplete": 79,
+      "oooIssue": 43,
+      "oooComplete": 45,
+      "idealIssue": 28,
+      "idealComplete": 30
+    },
+    {
+      "order": 52,
+      "address": "0x4000d0",
+      "disasm": "mov RDX, RDI, R9",
+      "type": "LOAD",
+      "srcRegs": [
+        "RDI",
+        "R9"
+      ],
+      "dstRegs": [
+        "RDX"
+      ],
+      "latency": 4,
+      "inOrderIssue": 78,
+      "inOrderComplete": 82,
+      "oooIssue": 43,
+      "oooComplete": 47,
+      "idealIssue": 28,
+      "idealComplete": 32
+    },
+    {
+      "order": 53,
+      "address": "0x4000d4",
+      "disasm": "add RCX, RSI, RAX",
+      "type": "ALU",
+      "srcRegs": [
+        "RSI",
+        "RAX"
+      ],
+      "dstRegs": [
+        "RCX"
+      ],
+      "latency": 1,
+      "inOrderIssue": 79,
+      "inOrderComplete": 80,
+      "oooIssue": 45,
+      "oooComplete": 46,
+      "idealIssue": 29,
+      "idealComplete": 30
+    },
+    {
+      "order": 54,
+      "address": "0x4000d8",
+      "disasm": "movsx R10, XMM1, RDX",
+      "type": "LOAD",
+      "srcRegs": [
+        "XMM1",
+        "RDX"
+      ],
+      "dstRegs": [
+        "R10"
+      ],
+      "latency": 4,
+      "inOrderIssue": 81,
+      "inOrderComplete": 85,
+      "oooIssue": 45,
+      "oooComplete": 49,
+      "idealIssue": 30,
+      "idealComplete": 34
+    },
+    {
+      "order": 55,
+      "address": "0x4000dc",
+      "disasm": "je R10, R8",
+      "type": "BRANCH",
+      "srcRegs": [
+        "R10",
+        "R8"
+      ],
+      "dstRegs": [],
+      "latency": 1,
+      "inOrderIssue": 84,
+      "inOrderComplete": 85,
+      "oooIssue": 47,
+      "oooComplete": 48,
+      "idealIssue": 30,
+      "idealComplete": 31
+    },
+    {
+      "order": 56,
+      "address": "0x4000e0",
+      "disasm": "mov RCX, RDX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RDX"
+      ],
+      "dstRegs": [
+        "RCX"
+      ],
+      "latency": 4,
+      "inOrderIssue": 84,
+      "inOrderComplete": 88,
+      "oooIssue": 47,
+      "oooComplete": 51,
+      "idealIssue": 31,
+      "idealComplete": 35
+    },
+    {
+      "order": 57,
+      "address": "0x4000e4",
+      "disasm": "movzx XMM1, RBX, RBX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RBX",
+        "RBX"
+      ],
+      "dstRegs": [
+        "XMM1"
+      ],
+      "latency": 4,
+      "inOrderIssue": 87,
+      "inOrderComplete": 91,
+      "oooIssue": 48,
+      "oooComplete": 52,
+      "idealIssue": 31,
+      "idealComplete": 35
+    },
+    {
+      "order": 58,
+      "address": "0x4000e8",
+      "disasm": "lea R11, XMM0",
+      "type": "ALU",
+      "srcRegs": [
+        "XMM0"
+      ],
+      "dstRegs": [
+        "R11"
+      ],
+      "latency": 1,
+      "inOrderIssue": 87,
+      "inOrderComplete": 88,
+      "oooIssue": 49,
+      "oooComplete": 50,
+      "idealIssue": 32,
+      "idealComplete": 33
+    },
+    {
+      "order": 59,
+      "address": "0x4000ec",
+      "disasm": "push XMM0",
+      "type": "STORE",
+      "srcRegs": [
+        "XMM0"
+      ],
+      "dstRegs": [],
+      "latency": 2,
+      "inOrderIssue": 89,
+      "inOrderComplete": 91,
+      "oooIssue": 50,
+      "oooComplete": 52,
+      "idealIssue": 32,
+      "idealComplete": 34
+    },
+    {
+      "order": 60,
+      "address": "0x4000f0",
+      "disasm": "movzx RAX, RCX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RCX"
+      ],
+      "dstRegs": [
+        "RAX"
+      ],
+      "latency": 4,
+      "inOrderIssue": 90,
+      "inOrderComplete": 94,
+      "oooIssue": 50,
+      "oooComplete": 54,
+      "idealIssue": 33,
+      "idealComplete": 37
+    },
+    {
+      "order": 61,
+      "address": "0x4000f4",
+      "disasm": "and R8, R9",
+      "type": "ALU",
+      "srcRegs": [
+        "R9"
+      ],
+      "dstRegs": [
+        "R8"
+      ],
+      "latency": 1,
+      "inOrderIssue": 92,
+      "inOrderComplete": 93,
+      "oooIssue": 51,
+      "oooComplete": 52,
+      "idealIssue": 33,
+      "idealComplete": 34
+    },
+    {
+      "order": 62,
+      "address": "0x4000f8",
+      "disasm": "movsx R9, XMM0",
+      "type": "LOAD",
+      "srcRegs": [
+        "XMM0"
+      ],
+      "dstRegs": [
+        "R9"
+      ],
+      "latency": 4,
+      "inOrderIssue": 93,
+      "inOrderComplete": 97,
+      "oooIssue": 52,
+      "oooComplete": 56,
+      "idealIssue": 34,
+      "idealComplete": 38
+    },
+    {
+      "order": 63,
+      "address": "0x4000fc",
+      "disasm": "jg R11",
+      "type": "BRANCH",
+      "srcRegs": [
+        "R11"
+      ],
+      "dstRegs": [],
+      "latency": 1,
+      "inOrderIssue": 94,
+      "inOrderComplete": 95,
+      "oooIssue": 53,
+      "oooComplete": 54,
+      "idealIssue": 35,
+      "idealComplete": 36
+    },
+    {
+      "order": 64,
+      "address": "0x400100",
+      "disasm": "mov R11, XMM1, R11",
+      "type": "LOAD",
+      "srcRegs": [
+        "XMM1",
+        "R11"
+      ],
+      "dstRegs": [
+        "R11"
+      ],
+      "latency": 4,
+      "inOrderIssue": 96,
+      "inOrderComplete": 100,
+      "oooIssue": 53,
+      "oooComplete": 57,
+      "idealIssue": 35,
+      "idealComplete": 39
+    },
+    {
+      "order": 65,
+      "address": "0x400104",
+      "disasm": "mov RSI, RDX, RAX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RDX",
+        "RAX"
+      ],
+      "dstRegs": [
+        "RSI"
+      ],
+      "latency": 4,
+      "inOrderIssue": 98,
+      "inOrderComplete": 102,
+      "oooIssue": 54,
+      "oooComplete": 58,
+      "idealIssue": 36,
+      "idealComplete": 40
+    },
+    {
+      "order": 66,
+      "address": "0x400108",
+      "disasm": "xor XMM0, RAX",
+      "type": "ALU",
+      "srcRegs": [
+        "RAX"
+      ],
+      "dstRegs": [
+        "XMM0"
+      ],
+      "latency": 1,
+      "inOrderIssue": 100,
+      "inOrderComplete": 101,
+      "oooIssue": 55,
+      "oooComplete": 56,
+      "idealIssue": 36,
+      "idealComplete": 37
+    },
+    {
+      "order": 67,
+      "address": "0x40010c",
+      "disasm": "mov RDX",
+      "type": "STORE",
+      "srcRegs": [
+        "RDX"
+      ],
+      "dstRegs": [],
+      "latency": 2,
+      "inOrderIssue": 101,
+      "inOrderComplete": 103,
+      "oooIssue": 56,
+      "oooComplete": 58,
+      "idealIssue": 37,
+      "idealComplete": 39
+    },
+    {
+      "order": 68,
+      "address": "0x400110",
+      "disasm": "movsx XMM1, RDX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RDX"
+      ],
+      "dstRegs": [
+        "XMM1"
+      ],
+      "latency": 4,
+      "inOrderIssue": 103,
+      "inOrderComplete": 107,
+      "oooIssue": 57,
+      "oooComplete": 61,
+      "idealIssue": 37,
+      "idealComplete": 41
+    },
+    {
+      "order": 69,
+      "address": "0x400114",
+      "disasm": "and RDI, RCX, R11",
+      "type": "ALU",
+      "srcRegs": [
+        "RCX",
+        "R11"
+      ],
+      "dstRegs": [
+        "RDI"
+      ],
+      "latency": 1,
+      "inOrderIssue": 104,
+      "inOrderComplete": 105,
+      "oooIssue": 57,
+      "oooComplete": 58,
+      "idealIssue": 38,
+      "idealComplete": 39
+    },
+    {
+      "order": 70,
+      "address": "0x400118",
+      "disasm": "mov R9, RCX, XMM0",
+      "type": "LOAD",
+      "srcRegs": [
+        "RCX",
+        "XMM0"
+      ],
+      "dstRegs": [
+        "R9"
+      ],
+      "latency": 4,
+      "inOrderIssue": 106,
+      "inOrderComplete": 110,
+      "oooIssue": 59,
+      "oooComplete": 63,
+      "idealIssue": 38,
+      "idealComplete": 42
+    },
+    {
+      "order": 71,
+      "address": "0x40011c",
+      "disasm": "jl R8, RDX",
+      "type": "BRANCH",
+      "srcRegs": [
+        "R8",
+        "RDX"
+      ],
+      "dstRegs": [],
+      "latency": 1,
+      "inOrderIssue": 108,
+      "inOrderComplete": 109,
+      "oooIssue": 60,
+      "oooComplete": 61,
+      "idealIssue": 39,
+      "idealComplete": 40
+    },
+    {
+      "order": 72,
+      "address": "0x400120",
+      "disasm": "mov RAX, RDI, RSI",
+      "type": "LOAD",
+      "srcRegs": [
+        "RDI",
+        "RSI"
+      ],
+      "dstRegs": [
+        "RAX"
+      ],
+      "latency": 4,
+      "inOrderIssue": 108,
+      "inOrderComplete": 112,
+      "oooIssue": 60,
+      "oooComplete": 64,
+      "idealIssue": 40,
+      "idealComplete": 44
+    },
+    {
+      "order": 73,
+      "address": "0x400124",
+      "disasm": "mov RDI, RSI, RBX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RSI",
+        "RBX"
+      ],
+      "dstRegs": [
+        "RDI"
+      ],
+      "latency": 4,
+      "inOrderIssue": 110,
+      "inOrderComplete": 114,
+      "oooIssue": 60,
+      "oooComplete": 64,
+      "idealIssue": 40,
+      "idealComplete": 44
+    },
+    {
+      "order": 74,
+      "address": "0x400128",
+      "disasm": "sub R8, RDX",
+      "type": "ALU",
+      "srcRegs": [
+        "RDX"
+      ],
+      "dstRegs": [
+        "R8"
+      ],
+      "latency": 1,
+      "inOrderIssue": 112,
+      "inOrderComplete": 113,
+      "oooIssue": 62,
+      "oooComplete": 63,
+      "idealIssue": 41,
+      "idealComplete": 42
+    },
+    {
+      "order": 75,
+      "address": "0x40012c",
+      "disasm": "movdqu R10",
+      "type": "STORE",
+      "srcRegs": [
+        "R10"
+      ],
+      "dstRegs": [],
+      "latency": 2,
+      "inOrderIssue": 112,
+      "inOrderComplete": 114,
+      "oooIssue": 62,
+      "oooComplete": 64,
+      "idealIssue": 41,
+      "idealComplete": 43
+    },
+    {
+      "order": 76,
+      "address": "0x400130",
+      "disasm": "movsx RDX, R8",
+      "type": "LOAD",
+      "srcRegs": [
+        "R8"
+      ],
+      "dstRegs": [
+        "RDX"
+      ],
+      "latency": 4,
+      "inOrderIssue": 114,
+      "inOrderComplete": 118,
+      "oooIssue": 63,
+      "oooComplete": 67,
+      "idealIssue": 42,
+      "idealComplete": 46
+    },
+    {
+      "order": 77,
+      "address": "0x400134",
+      "disasm": "imul R10, RDX",
+      "type": "ALU",
+      "srcRegs": [
+        "RDX"
+      ],
+      "dstRegs": [
+        "R10"
+      ],
+      "latency": 1,
+      "inOrderIssue": 115,
+      "inOrderComplete": 116,
+      "oooIssue": 64,
+      "oooComplete": 65,
+      "idealIssue": 42,
+      "idealComplete": 43
+    },
+    {
+      "order": 78,
+      "address": "0x400138",
+      "disasm": "movsx XMM1, RSI",
+      "type": "LOAD",
+      "srcRegs": [
+        "RSI"
+      ],
+      "dstRegs": [
+        "XMM1"
+      ],
+      "latency": 4,
+      "inOrderIssue": 118,
+      "inOrderComplete": 122,
+      "oooIssue": 65,
+      "oooComplete": 69,
+      "idealIssue": 43,
+      "idealComplete": 47
+    },
+    {
+      "order": 79,
+      "address": "0x40013c",
+      "disasm": "je XMM0, XMM1",
+      "type": "BRANCH",
+      "srcRegs": [
+        "XMM0",
+        "XMM1"
+      ],
+      "dstRegs": [],
+      "latency": 1,
+      "inOrderIssue": 118,
+      "inOrderComplete": 119,
+      "oooIssue": 67,
+      "oooComplete": 68,
+      "idealIssue": 43,
+      "idealComplete": 44
+    },
+    {
+      "order": 80,
+      "address": "0x400140",
+      "disasm": "mov R10, RAX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RAX"
+      ],
+      "dstRegs": [
+        "R10"
+      ],
+      "latency": 4,
+      "inOrderIssue": 120,
+      "inOrderComplete": 124,
+      "oooIssue": 67,
+      "oooComplete": 71,
+      "idealIssue": 44,
+      "idealComplete": 48
+    },
+    {
+      "order": 81,
+      "address": "0x400144",
+      "disasm": "mov RSI, R8",
+      "type": "LOAD",
+      "srcRegs": [
+        "R8"
+      ],
+      "dstRegs": [
+        "RSI"
+      ],
+      "latency": 4,
+      "inOrderIssue": 121,
+      "inOrderComplete": 125,
+      "oooIssue": 67,
+      "oooComplete": 71,
+      "idealIssue": 45,
+      "idealComplete": 49
+    },
+    {
+      "order": 82,
+      "address": "0x400148",
+      "disasm": "sub RDX, R11, R10",
+      "type": "ALU",
+      "srcRegs": [
+        "R11",
+        "R10"
+      ],
+      "dstRegs": [
+        "RDX"
+      ],
+      "latency": 1,
+      "inOrderIssue": 123,
+      "inOrderComplete": 124,
+      "oooIssue": 68,
+      "oooComplete": 69,
+      "idealIssue": 45,
+      "idealComplete": 46
+    },
+    {
+      "order": 83,
+      "address": "0x40014c",
+      "disasm": "push XMM0, RDX",
+      "type": "STORE",
+      "srcRegs": [
+        "XMM0",
+        "RDX"
+      ],
+      "dstRegs": [],
+      "latency": 2,
+      "inOrderIssue": 125,
+      "inOrderComplete": 127,
+      "oooIssue": 69,
+      "oooComplete": 71,
+      "idealIssue": 46,
+      "idealComplete": 48
+    },
+    {
+      "order": 84,
+      "address": "0x400150",
+      "disasm": "movsx XMM1, R8, RAX",
+      "type": "LOAD",
+      "srcRegs": [
+        "R8",
+        "RAX"
+      ],
+      "dstRegs": [
+        "XMM1"
+      ],
+      "latency": 4,
+      "inOrderIssue": 126,
+      "inOrderComplete": 130,
+      "oooIssue": 71,
+      "oooComplete": 75,
+      "idealIssue": 46,
+      "idealComplete": 50
+    },
+    {
+      "order": 85,
+      "address": "0x400154",
+      "disasm": "and XMM1, R9",
+      "type": "ALU",
+      "srcRegs": [
+        "R9"
+      ],
+      "dstRegs": [
+        "XMM1"
+      ],
+      "latency": 1,
+      "inOrderIssue": 128,
+      "inOrderComplete": 129,
+      "oooIssue": 71,
+      "oooComplete": 72,
+      "idealIssue": 47,
+      "idealComplete": 48
+    },
+    {
+      "order": 86,
+      "address": "0x400158",
+      "disasm": "movzx R9, RBX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RBX"
+      ],
+      "dstRegs": [
+        "R9"
+      ],
+      "latency": 4,
+      "inOrderIssue": 129,
+      "inOrderComplete": 133,
+      "oooIssue": 72,
+      "oooComplete": 76,
+      "idealIssue": 47,
+      "idealComplete": 51
+    },
+    {
+      "order": 87,
+      "address": "0x40015c",
+      "disasm": "jmp R10, XMM1",
+      "type": "BRANCH",
+      "srcRegs": [
+        "R10",
+        "XMM1"
+      ],
+      "dstRegs": [],
+      "latency": 1,
+      "inOrderIssue": 130,
+      "inOrderComplete": 131,
+      "oooIssue": 72,
+      "oooComplete": 73,
+      "idealIssue": 48,
+      "idealComplete": 49
+    },
+    {
+      "order": 88,
+      "address": "0x400160",
+      "disasm": "movzx RSI, RDX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RDX"
+      ],
+      "dstRegs": [
+        "RSI"
+      ],
+      "latency": 4,
+      "inOrderIssue": 133,
+      "inOrderComplete": 137,
+      "oooIssue": 74,
+      "oooComplete": 78,
+      "idealIssue": 48,
+      "idealComplete": 52
+    },
+    {
+      "order": 89,
+      "address": "0x400164",
+      "disasm": "mov R8, RCX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RCX"
+      ],
+      "dstRegs": [
+        "R8"
+      ],
+      "latency": 4,
+      "inOrderIssue": 133,
+      "inOrderComplete": 137,
+      "oooIssue": 75,
+      "oooComplete": 79,
+      "idealIssue": 49,
+      "idealComplete": 53
+    },
+    {
+      "order": 90,
+      "address": "0x400168",
+      "disasm": "imul R8, R9, R10",
+      "type": "ALU",
+      "srcRegs": [
+        "R9",
+        "R10"
+      ],
+      "dstRegs": [
+        "R8"
+      ],
+      "latency": 1,
+      "inOrderIssue": 136,
+      "inOrderComplete": 137,
+      "oooIssue": 75,
+      "oooComplete": 76,
+      "idealIssue": 50,
+      "idealComplete": 51
+    },
+    {
+      "order": 91,
+      "address": "0x40016c",
+      "disasm": "push RDI",
+      "type": "STORE",
+      "srcRegs": [
+        "RDI"
+      ],
+      "dstRegs": [],
+      "latency": 2,
+      "inOrderIssue": 137,
+      "inOrderComplete": 139,
+      "oooIssue": 76,
+      "oooComplete": 78,
+      "idealIssue": 50,
+      "idealComplete": 52
+    },
+    {
+      "order": 92,
+      "address": "0x400170",
+      "disasm": "movsx XMM0, R9, RCX",
+      "type": "LOAD",
+      "srcRegs": [
+        "R9",
+        "RCX"
+      ],
+      "dstRegs": [
+        "XMM0"
+      ],
+      "latency": 4,
+      "inOrderIssue": 138,
+      "inOrderComplete": 142,
+      "oooIssue": 77,
+      "oooComplete": 81,
+      "idealIssue": 51,
+      "idealComplete": 55
+    },
+    {
+      "order": 93,
+      "address": "0x400174",
+      "disasm": "sub R10, RDX",
+      "type": "ALU",
+      "srcRegs": [
+        "RDX"
+      ],
+      "dstRegs": [
+        "R10"
+      ],
+      "latency": 1,
+      "inOrderIssue": 139,
+      "inOrderComplete": 140,
+      "oooIssue": 78,
+      "oooComplete": 79,
+      "idealIssue": 51,
+      "idealComplete": 52
+    },
+    {
+      "order": 94,
+      "address": "0x400178",
+      "disasm": "mov R11, RDX",
+      "type": "LOAD",
+      "srcRegs": [
+        "RDX"
+      ],
+      "dstRegs": [
+        "R11"
+      ],
+      "latency": 4,
+      "inOrderIssue": 141,
+      "inOrderComplete": 145,
+      "oooIssue": 79,
+      "oooComplete": 83,
+      "idealIssue": 52,
+      "idealComplete": 56
+    },
+    {
+      "order": 95,
+      "address": "0x40017c",
+      "disasm": "je R9",
+      "type": "BRANCH",
+      "srcRegs": [
+        "R9"
+      ],
+      "dstRegs": [],
+      "latency": 1,
+      "inOrderIssue": 143,
+      "inOrderComplete": 144,
+      "oooIssue": 80,
+      "oooComplete": 81,
+      "idealIssue": 52,
+      "idealComplete": 53
+    },
+    {
+      "order": 96,
+      "address": "0x400180",
+      "disasm": "movzx R8, XMM0, RCX",
+      "type": "LOAD",
+      "srcRegs": [
+        "XMM0",
+        "RCX"
+      ],
+      "dstRegs": [
+        "R8"
+      ],
+      "latency": 4,
+      "inOrderIssue": 145,
+      "inOrderComplete": 149,
+      "oooIssue": 80,
+      "oooComplete": 84,
+      "idealIssue": 53,
+      "idealComplete": 57
+    },
+    {
+      "order": 97,
+      "address": "0x400184",
+      "disasm": "movzx RBX, RDI, XMM0",
+      "type": "LOAD",
+      "srcRegs": [
+        "RDI",
+        "XMM0"
+      ],
+      "dstRegs": [
+        "RBX"
+      ],
+      "latency": 4,
+      "inOrderIssue": 146,
+      "inOrderComplete": 150,
+      "oooIssue": 82,
+      "oooComplete": 86,
+      "idealIssue": 53,
+      "idealComplete": 57
+    },
+    {
+      "order": 98,
+      "address": "0x400188",
+      "disasm": "and XMM0, RBX, XMM0",
+      "type": "ALU",
+      "srcRegs": [
+        "RBX",
+        "XMM0"
+      ],
+      "dstRegs": [
+        "XMM0"
+      ],
+      "latency": 1,
+      "inOrderIssue": 147,
+      "inOrderComplete": 148,
+      "oooIssue": 82,
+      "oooComplete": 83,
+      "idealIssue": 54,
+      "idealComplete": 55
+    },
+    {
+      "order": 99,
+      "address": "0x40018c",
+      "disasm": "movdqu XMM0",
+      "type": "STORE",
+      "srcRegs": [
+        "XMM0"
+      ],
+      "dstRegs": [],
+      "latency": 2,
+      "inOrderIssue": 149,
+      "inOrderComplete": 151,
+      "oooIssue": 82,
+      "oooComplete": 84,
+      "idealIssue": 55,
+      "idealComplete": 57
+    }
+  ],
+  "dependencies": [
+    {
+      "from": 1,
+      "to": 2,
+      "type": "WAR",
+      "register": "RAX"
+    },
+    {
+      "from": 2,
+      "to": 4,
+      "type": "WAR",
+      "register": "XMM1"
+    },
+    {
+      "from": 0,
+      "to": 5,
+      "type": "WAR",
+      "register": "RDX"
+    },
+    {
+      "from": 2,
+      "to": 6,
+      "type": "WAR",
+      "register": "R9"
+    },
+    {
+      "from": 4,
+      "to": 6,
+      "type": "WAR",
+      "register": "R9"
+    },
+    {
+      "from": 2,
+      "to": 7,
+      "type": "RAW",
+      "register": "RAX"
+    },
+    {
+      "from": 1,
+      "to": 7,
+      "type": "RAW",
+      "register": "RCX"
+    },
+    {
+      "from": 5,
+      "to": 8,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 4,
+      "to": 8,
+      "type": "WAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 2,
+      "to": 9,
+      "type": "RAW",
+      "register": "RAX"
+    },
+    {
+      "from": 0,
+      "to": 10,
+      "type": "WAW",
+      "register": "RSI"
+    },
+    {
+      "from": 6,
+      "to": 11,
+      "type": "RAW",
+      "register": "R9"
+    },
+    {
+      "from": 6,
+      "to": 12,
+      "type": "RAW",
+      "register": "R9"
+    },
+    {
+      "from": 10,
+      "to": 12,
+      "type": "WAW",
+      "register": "RSI"
+    },
+    {
+      "from": 9,
+      "to": 13,
+      "type": "RAW",
+      "register": "R11"
+    },
+    {
+      "from": 2,
+      "to": 13,
+      "type": "WAW",
+      "register": "RAX"
+    },
+    {
+      "from": 7,
+      "to": 13,
+      "type": "WAR",
+      "register": "RAX"
+    },
+    {
+      "from": 9,
+      "to": 13,
+      "type": "WAR",
+      "register": "RAX"
+    },
+    {
+      "from": 12,
+      "to": 14,
+      "type": "RAW",
+      "register": "RSI"
+    },
+    {
+      "from": 5,
+      "to": 14,
+      "type": "WAW",
+      "register": "RDX"
+    },
+    {
+      "from": 8,
+      "to": 14,
+      "type": "WAR",
+      "register": "RDX"
+    },
+    {
+      "from": 1,
+      "to": 15,
+      "type": "RAW",
+      "register": "RCX"
+    },
+    {
+      "from": 14,
+      "to": 15,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 12,
+      "to": 16,
+      "type": "RAW",
+      "register": "RSI"
+    },
+    {
+      "from": 6,
+      "to": 16,
+      "type": "RAW",
+      "register": "R9"
+    },
+    {
+      "from": 11,
+      "to": 16,
+      "type": "WAR",
+      "register": "RDI"
+    },
+    {
+      "from": 6,
+      "to": 17,
+      "type": "RAW",
+      "register": "R9"
+    },
+    {
+      "from": 3,
+      "to": 17,
+      "type": "WAR",
+      "register": "RBX"
+    },
+    {
+      "from": 4,
+      "to": 17,
+      "type": "WAR",
+      "register": "RBX"
+    },
+    {
+      "from": 1,
+      "to": 18,
+      "type": "RAW",
+      "register": "RCX"
+    },
+    {
+      "from": 1,
+      "to": 18,
+      "type": "RAW",
+      "register": "RCX"
+    },
+    {
+      "from": 13,
+      "to": 18,
+      "type": "WAW",
+      "register": "RAX"
+    },
+    {
+      "from": 16,
+      "to": 19,
+      "type": "RAW",
+      "register": "RDI"
+    },
+    {
+      "from": 6,
+      "to": 20,
+      "type": "RAW",
+      "register": "R9"
+    },
+    {
+      "from": 18,
+      "to": 20,
+      "type": "RAW",
+      "register": "RAX"
+    },
+    {
+      "from": 16,
+      "to": 20,
+      "type": "WAW",
+      "register": "RDI"
+    },
+    {
+      "from": 19,
+      "to": 20,
+      "type": "WAR",
+      "register": "RDI"
+    },
+    {
+      "from": 12,
+      "to": 21,
+      "type": "RAW",
+      "register": "RSI"
+    },
+    {
+      "from": 12,
+      "to": 22,
+      "type": "RAW",
+      "register": "RSI"
+    },
+    {
+      "from": 18,
+      "to": 22,
+      "type": "WAW",
+      "register": "RAX"
+    },
+    {
+      "from": 20,
+      "to": 22,
+      "type": "WAR",
+      "register": "RAX"
+    },
+    {
+      "from": 12,
+      "to": 23,
+      "type": "RAW",
+      "register": "RSI"
+    },
+    {
+      "from": 1,
+      "to": 23,
+      "type": "RAW",
+      "register": "RCX"
+    },
+    {
+      "from": 12,
+      "to": 24,
+      "type": "RAW",
+      "register": "RSI"
+    },
+    {
+      "from": 21,
+      "to": 24,
+      "type": "RAW",
+      "register": "XMM0"
+    },
+    {
+      "from": 20,
+      "to": 24,
+      "type": "WAW",
+      "register": "RDI"
+    },
+    {
+      "from": 22,
+      "to": 25,
+      "type": "RAW",
+      "register": "RAX"
+    },
+    {
+      "from": 8,
+      "to": 25,
+      "type": "WAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 1,
+      "to": 26,
+      "type": "RAW",
+      "register": "RCX"
+    },
+    {
+      "from": 6,
+      "to": 26,
+      "type": "RAW",
+      "register": "R9"
+    },
+    {
+      "from": 5,
+      "to": 26,
+      "type": "WAR",
+      "register": "R10"
+    },
+    {
+      "from": 10,
+      "to": 26,
+      "type": "WAR",
+      "register": "R10"
+    },
+    {
+      "from": 14,
+      "to": 27,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 24,
+      "to": 27,
+      "type": "RAW",
+      "register": "RDI"
+    },
+    {
+      "from": 9,
+      "to": 28,
+      "type": "RAW",
+      "register": "R11"
+    },
+    {
+      "from": 6,
+      "to": 28,
+      "type": "RAW",
+      "register": "R9"
+    },
+    {
+      "from": 9,
+      "to": 28,
+      "type": "WAW",
+      "register": "R11"
+    },
+    {
+      "from": 13,
+      "to": 28,
+      "type": "WAR",
+      "register": "R11"
+    },
+    {
+      "from": 26,
+      "to": 29,
+      "type": "RAW",
+      "register": "R10"
+    },
+    {
+      "from": 25,
+      "to": 29,
+      "type": "WAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 6,
+      "to": 30,
+      "type": "WAW",
+      "register": "R9"
+    },
+    {
+      "from": 11,
+      "to": 30,
+      "type": "WAR",
+      "register": "R9"
+    },
+    {
+      "from": 12,
+      "to": 30,
+      "type": "WAR",
+      "register": "R9"
+    },
+    {
+      "from": 16,
+      "to": 30,
+      "type": "WAR",
+      "register": "R9"
+    },
+    {
+      "from": 17,
+      "to": 30,
+      "type": "WAR",
+      "register": "R9"
+    },
+    {
+      "from": 20,
+      "to": 30,
+      "type": "WAR",
+      "register": "R9"
+    },
+    {
+      "from": 26,
+      "to": 30,
+      "type": "WAR",
+      "register": "R9"
+    },
+    {
+      "from": 28,
+      "to": 30,
+      "type": "WAR",
+      "register": "R9"
+    },
+    {
+      "from": 28,
+      "to": 31,
+      "type": "RAW",
+      "register": "R11"
+    },
+    {
+      "from": 17,
+      "to": 32,
+      "type": "WAW",
+      "register": "RBX"
+    },
+    {
+      "from": 32,
+      "to": 33,
+      "type": "RAW",
+      "register": "RBX"
+    },
+    {
+      "from": 14,
+      "to": 33,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 29,
+      "to": 33,
+      "type": "WAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 14,
+      "to": 34,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 24,
+      "to": 34,
+      "type": "WAW",
+      "register": "RDI"
+    },
+    {
+      "from": 27,
+      "to": 34,
+      "type": "WAR",
+      "register": "RDI"
+    },
+    {
+      "from": 12,
+      "to": 35,
+      "type": "RAW",
+      "register": "RSI"
+    },
+    {
+      "from": 12,
+      "to": 36,
+      "type": "RAW",
+      "register": "RSI"
+    },
+    {
+      "from": 12,
+      "to": 36,
+      "type": "WAW",
+      "register": "RSI"
+    },
+    {
+      "from": 14,
+      "to": 36,
+      "type": "WAR",
+      "register": "RSI"
+    },
+    {
+      "from": 16,
+      "to": 36,
+      "type": "WAR",
+      "register": "RSI"
+    },
+    {
+      "from": 21,
+      "to": 36,
+      "type": "WAR",
+      "register": "RSI"
+    },
+    {
+      "from": 22,
+      "to": 36,
+      "type": "WAR",
+      "register": "RSI"
+    },
+    {
+      "from": 23,
+      "to": 36,
+      "type": "WAR",
+      "register": "RSI"
+    },
+    {
+      "from": 24,
+      "to": 36,
+      "type": "WAR",
+      "register": "RSI"
+    },
+    {
+      "from": 35,
+      "to": 36,
+      "type": "WAR",
+      "register": "RSI"
+    },
+    {
+      "from": 36,
+      "to": 37,
+      "type": "RAW",
+      "register": "RSI"
+    },
+    {
+      "from": 33,
+      "to": 37,
+      "type": "WAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 1,
+      "to": 38,
+      "type": "RAW",
+      "register": "RCX"
+    },
+    {
+      "from": 26,
+      "to": 38,
+      "type": "RAW",
+      "register": "R10"
+    },
+    {
+      "from": 37,
+      "to": 38,
+      "type": "WAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 22,
+      "to": 39,
+      "type": "RAW",
+      "register": "RAX"
+    },
+    {
+      "from": 34,
+      "to": 39,
+      "type": "RAW",
+      "register": "RDI"
+    },
+    {
+      "from": 34,
+      "to": 40,
+      "type": "RAW",
+      "register": "RDI"
+    },
+    {
+      "from": 32,
+      "to": 40,
+      "type": "RAW",
+      "register": "RBX"
+    },
+    {
+      "from": 28,
+      "to": 40,
+      "type": "WAW",
+      "register": "R11"
+    },
+    {
+      "from": 31,
+      "to": 40,
+      "type": "WAR",
+      "register": "R11"
+    },
+    {
+      "from": 40,
+      "to": 41,
+      "type": "RAW",
+      "register": "R11"
+    },
+    {
+      "from": 32,
+      "to": 41,
+      "type": "RAW",
+      "register": "RBX"
+    },
+    {
+      "from": 21,
+      "to": 41,
+      "type": "WAW",
+      "register": "XMM0"
+    },
+    {
+      "from": 24,
+      "to": 41,
+      "type": "WAR",
+      "register": "XMM0"
+    },
+    {
+      "from": 40,
+      "to": 42,
+      "type": "RAW",
+      "register": "R11"
+    },
+    {
+      "from": 8,
+      "to": 42,
+      "type": "WAR",
+      "register": "R8"
+    },
+    {
+      "from": 19,
+      "to": 42,
+      "type": "WAR",
+      "register": "R8"
+    },
+    {
+      "from": 30,
+      "to": 42,
+      "type": "WAR",
+      "register": "R8"
+    },
+    {
+      "from": 31,
+      "to": 42,
+      "type": "WAR",
+      "register": "R8"
+    },
+    {
+      "from": 32,
+      "to": 42,
+      "type": "WAR",
+      "register": "R8"
+    },
+    {
+      "from": 35,
+      "to": 42,
+      "type": "WAR",
+      "register": "R8"
+    },
+    {
+      "from": 41,
+      "to": 43,
+      "type": "RAW",
+      "register": "XMM0"
+    },
+    {
+      "from": 40,
+      "to": 43,
+      "type": "RAW",
+      "register": "R11"
+    },
+    {
+      "from": 38,
+      "to": 44,
+      "type": "RAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 41,
+      "to": 44,
+      "type": "RAW",
+      "register": "XMM0"
+    },
+    {
+      "from": 38,
+      "to": 44,
+      "type": "WAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 1,
+      "to": 45,
+      "type": "RAW",
+      "register": "RCX"
+    },
+    {
+      "from": 34,
+      "to": 45,
+      "type": "WAW",
+      "register": "RDI"
+    },
+    {
+      "from": 39,
+      "to": 45,
+      "type": "WAR",
+      "register": "RDI"
+    },
+    {
+      "from": 40,
+      "to": 45,
+      "type": "WAR",
+      "register": "RDI"
+    },
+    {
+      "from": 14,
+      "to": 46,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 1,
+      "to": 46,
+      "type": "RAW",
+      "register": "RCX"
+    },
+    {
+      "from": 40,
+      "to": 46,
+      "type": "WAW",
+      "register": "R11"
+    },
+    {
+      "from": 41,
+      "to": 46,
+      "type": "WAR",
+      "register": "R11"
+    },
+    {
+      "from": 42,
+      "to": 46,
+      "type": "WAR",
+      "register": "R11"
+    },
+    {
+      "from": 43,
+      "to": 46,
+      "type": "WAR",
+      "register": "R11"
+    },
+    {
+      "from": 36,
+      "to": 47,
+      "type": "RAW",
+      "register": "RSI"
+    },
+    {
+      "from": 44,
+      "to": 47,
+      "type": "RAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 46,
+      "to": 48,
+      "type": "RAW",
+      "register": "R11"
+    },
+    {
+      "from": 42,
+      "to": 48,
+      "type": "WAW",
+      "register": "R8"
+    },
+    {
+      "from": 36,
+      "to": 49,
+      "type": "RAW",
+      "register": "RSI"
+    },
+    {
+      "from": 30,
+      "to": 49,
+      "type": "RAW",
+      "register": "R9"
+    },
+    {
+      "from": 46,
+      "to": 49,
+      "type": "WAW",
+      "register": "R11"
+    },
+    {
+      "from": 48,
+      "to": 49,
+      "type": "WAR",
+      "register": "R11"
+    },
+    {
+      "from": 49,
+      "to": 50,
+      "type": "RAW",
+      "register": "R11"
+    },
+    {
+      "from": 30,
+      "to": 50,
+      "type": "RAW",
+      "register": "R9"
+    },
+    {
+      "from": 14,
+      "to": 50,
+      "type": "WAW",
+      "register": "RDX"
+    },
+    {
+      "from": 15,
+      "to": 50,
+      "type": "WAR",
+      "register": "RDX"
+    },
+    {
+      "from": 27,
+      "to": 50,
+      "type": "WAR",
+      "register": "RDX"
+    },
+    {
+      "from": 33,
+      "to": 50,
+      "type": "WAR",
+      "register": "RDX"
+    },
+    {
+      "from": 34,
+      "to": 50,
+      "type": "WAR",
+      "register": "RDX"
+    },
+    {
+      "from": 46,
+      "to": 50,
+      "type": "WAR",
+      "register": "RDX"
+    },
+    {
+      "from": 50,
+      "to": 51,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 45,
+      "to": 52,
+      "type": "RAW",
+      "register": "RDI"
+    },
+    {
+      "from": 30,
+      "to": 52,
+      "type": "RAW",
+      "register": "R9"
+    },
+    {
+      "from": 50,
+      "to": 52,
+      "type": "WAW",
+      "register": "RDX"
+    },
+    {
+      "from": 51,
+      "to": 52,
+      "type": "WAR",
+      "register": "RDX"
+    },
+    {
+      "from": 36,
+      "to": 53,
+      "type": "RAW",
+      "register": "RSI"
+    },
+    {
+      "from": 22,
+      "to": 53,
+      "type": "RAW",
+      "register": "RAX"
+    },
+    {
+      "from": 1,
+      "to": 53,
+      "type": "WAW",
+      "register": "RCX"
+    },
+    {
+      "from": 7,
+      "to": 53,
+      "type": "WAR",
+      "register": "RCX"
+    },
+    {
+      "from": 15,
+      "to": 53,
+      "type": "WAR",
+      "register": "RCX"
+    },
+    {
+      "from": 18,
+      "to": 53,
+      "type": "WAR",
+      "register": "RCX"
+    },
+    {
+      "from": 18,
+      "to": 53,
+      "type": "WAR",
+      "register": "RCX"
+    },
+    {
+      "from": 23,
+      "to": 53,
+      "type": "WAR",
+      "register": "RCX"
+    },
+    {
+      "from": 26,
+      "to": 53,
+      "type": "WAR",
+      "register": "RCX"
+    },
+    {
+      "from": 38,
+      "to": 53,
+      "type": "WAR",
+      "register": "RCX"
+    },
+    {
+      "from": 45,
+      "to": 53,
+      "type": "WAR",
+      "register": "RCX"
+    },
+    {
+      "from": 46,
+      "to": 53,
+      "type": "WAR",
+      "register": "RCX"
+    },
+    {
+      "from": 44,
+      "to": 54,
+      "type": "RAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 52,
+      "to": 54,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 26,
+      "to": 54,
+      "type": "WAW",
+      "register": "R10"
+    },
+    {
+      "from": 29,
+      "to": 54,
+      "type": "WAR",
+      "register": "R10"
+    },
+    {
+      "from": 38,
+      "to": 54,
+      "type": "WAR",
+      "register": "R10"
+    },
+    {
+      "from": 54,
+      "to": 55,
+      "type": "RAW",
+      "register": "R10"
+    },
+    {
+      "from": 48,
+      "to": 55,
+      "type": "RAW",
+      "register": "R8"
+    },
+    {
+      "from": 52,
+      "to": 56,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 53,
+      "to": 56,
+      "type": "WAW",
+      "register": "RCX"
+    },
+    {
+      "from": 32,
+      "to": 57,
+      "type": "RAW",
+      "register": "RBX"
+    },
+    {
+      "from": 32,
+      "to": 57,
+      "type": "RAW",
+      "register": "RBX"
+    },
+    {
+      "from": 44,
+      "to": 57,
+      "type": "WAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 47,
+      "to": 57,
+      "type": "WAR",
+      "register": "XMM1"
+    },
+    {
+      "from": 54,
+      "to": 57,
+      "type": "WAR",
+      "register": "XMM1"
+    },
+    {
+      "from": 41,
+      "to": 58,
+      "type": "RAW",
+      "register": "XMM0"
+    },
+    {
+      "from": 49,
+      "to": 58,
+      "type": "WAW",
+      "register": "R11"
+    },
+    {
+      "from": 50,
+      "to": 58,
+      "type": "WAR",
+      "register": "R11"
+    },
+    {
+      "from": 41,
+      "to": 59,
+      "type": "RAW",
+      "register": "XMM0"
+    },
+    {
+      "from": 56,
+      "to": 60,
+      "type": "RAW",
+      "register": "RCX"
+    },
+    {
+      "from": 22,
+      "to": 60,
+      "type": "WAW",
+      "register": "RAX"
+    },
+    {
+      "from": 25,
+      "to": 60,
+      "type": "WAR",
+      "register": "RAX"
+    },
+    {
+      "from": 39,
+      "to": 60,
+      "type": "WAR",
+      "register": "RAX"
+    },
+    {
+      "from": 53,
+      "to": 60,
+      "type": "WAR",
+      "register": "RAX"
+    },
+    {
+      "from": 30,
+      "to": 61,
+      "type": "RAW",
+      "register": "R9"
+    },
+    {
+      "from": 48,
+      "to": 61,
+      "type": "WAW",
+      "register": "R8"
+    },
+    {
+      "from": 55,
+      "to": 61,
+      "type": "WAR",
+      "register": "R8"
+    },
+    {
+      "from": 41,
+      "to": 62,
+      "type": "RAW",
+      "register": "XMM0"
+    },
+    {
+      "from": 30,
+      "to": 62,
+      "type": "WAW",
+      "register": "R9"
+    },
+    {
+      "from": 49,
+      "to": 62,
+      "type": "WAR",
+      "register": "R9"
+    },
+    {
+      "from": 50,
+      "to": 62,
+      "type": "WAR",
+      "register": "R9"
+    },
+    {
+      "from": 52,
+      "to": 62,
+      "type": "WAR",
+      "register": "R9"
+    },
+    {
+      "from": 61,
+      "to": 62,
+      "type": "WAR",
+      "register": "R9"
+    },
+    {
+      "from": 58,
+      "to": 63,
+      "type": "RAW",
+      "register": "R11"
+    },
+    {
+      "from": 57,
+      "to": 64,
+      "type": "RAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 58,
+      "to": 64,
+      "type": "RAW",
+      "register": "R11"
+    },
+    {
+      "from": 58,
+      "to": 64,
+      "type": "WAW",
+      "register": "R11"
+    },
+    {
+      "from": 63,
+      "to": 64,
+      "type": "WAR",
+      "register": "R11"
+    },
+    {
+      "from": 52,
+      "to": 65,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 60,
+      "to": 65,
+      "type": "RAW",
+      "register": "RAX"
+    },
+    {
+      "from": 36,
+      "to": 65,
+      "type": "WAW",
+      "register": "RSI"
+    },
+    {
+      "from": 37,
+      "to": 65,
+      "type": "WAR",
+      "register": "RSI"
+    },
+    {
+      "from": 47,
+      "to": 65,
+      "type": "WAR",
+      "register": "RSI"
+    },
+    {
+      "from": 49,
+      "to": 65,
+      "type": "WAR",
+      "register": "RSI"
+    },
+    {
+      "from": 53,
+      "to": 65,
+      "type": "WAR",
+      "register": "RSI"
+    },
+    {
+      "from": 60,
+      "to": 66,
+      "type": "RAW",
+      "register": "RAX"
+    },
+    {
+      "from": 41,
+      "to": 66,
+      "type": "WAW",
+      "register": "XMM0"
+    },
+    {
+      "from": 43,
+      "to": 66,
+      "type": "WAR",
+      "register": "XMM0"
+    },
+    {
+      "from": 44,
+      "to": 66,
+      "type": "WAR",
+      "register": "XMM0"
+    },
+    {
+      "from": 58,
+      "to": 66,
+      "type": "WAR",
+      "register": "XMM0"
+    },
+    {
+      "from": 59,
+      "to": 66,
+      "type": "WAR",
+      "register": "XMM0"
+    },
+    {
+      "from": 62,
+      "to": 66,
+      "type": "WAR",
+      "register": "XMM0"
+    },
+    {
+      "from": 52,
+      "to": 67,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 52,
+      "to": 68,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 57,
+      "to": 68,
+      "type": "WAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 64,
+      "to": 68,
+      "type": "WAR",
+      "register": "XMM1"
+    },
+    {
+      "from": 56,
+      "to": 69,
+      "type": "RAW",
+      "register": "RCX"
+    },
+    {
+      "from": 64,
+      "to": 69,
+      "type": "RAW",
+      "register": "R11"
+    },
+    {
+      "from": 45,
+      "to": 69,
+      "type": "WAW",
+      "register": "RDI"
+    },
+    {
+      "from": 52,
+      "to": 69,
+      "type": "WAR",
+      "register": "RDI"
+    },
+    {
+      "from": 56,
+      "to": 70,
+      "type": "RAW",
+      "register": "RCX"
+    },
+    {
+      "from": 66,
+      "to": 70,
+      "type": "RAW",
+      "register": "XMM0"
+    },
+    {
+      "from": 62,
+      "to": 70,
+      "type": "WAW",
+      "register": "R9"
+    },
+    {
+      "from": 61,
+      "to": 71,
+      "type": "RAW",
+      "register": "R8"
+    },
+    {
+      "from": 52,
+      "to": 71,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 69,
+      "to": 72,
+      "type": "RAW",
+      "register": "RDI"
+    },
+    {
+      "from": 65,
+      "to": 72,
+      "type": "RAW",
+      "register": "RSI"
+    },
+    {
+      "from": 60,
+      "to": 72,
+      "type": "WAW",
+      "register": "RAX"
+    },
+    {
+      "from": 65,
+      "to": 72,
+      "type": "WAR",
+      "register": "RAX"
+    },
+    {
+      "from": 66,
+      "to": 72,
+      "type": "WAR",
+      "register": "RAX"
+    },
+    {
+      "from": 65,
+      "to": 73,
+      "type": "RAW",
+      "register": "RSI"
+    },
+    {
+      "from": 32,
+      "to": 73,
+      "type": "RAW",
+      "register": "RBX"
+    },
+    {
+      "from": 69,
+      "to": 73,
+      "type": "WAW",
+      "register": "RDI"
+    },
+    {
+      "from": 72,
+      "to": 73,
+      "type": "WAR",
+      "register": "RDI"
+    },
+    {
+      "from": 52,
+      "to": 74,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 61,
+      "to": 74,
+      "type": "WAW",
+      "register": "R8"
+    },
+    {
+      "from": 71,
+      "to": 74,
+      "type": "WAR",
+      "register": "R8"
+    },
+    {
+      "from": 54,
+      "to": 75,
+      "type": "RAW",
+      "register": "R10"
+    },
+    {
+      "from": 74,
+      "to": 76,
+      "type": "RAW",
+      "register": "R8"
+    },
+    {
+      "from": 52,
+      "to": 76,
+      "type": "WAW",
+      "register": "RDX"
+    },
+    {
+      "from": 54,
+      "to": 76,
+      "type": "WAR",
+      "register": "RDX"
+    },
+    {
+      "from": 56,
+      "to": 76,
+      "type": "WAR",
+      "register": "RDX"
+    },
+    {
+      "from": 65,
+      "to": 76,
+      "type": "WAR",
+      "register": "RDX"
+    },
+    {
+      "from": 67,
+      "to": 76,
+      "type": "WAR",
+      "register": "RDX"
+    },
+    {
+      "from": 68,
+      "to": 76,
+      "type": "WAR",
+      "register": "RDX"
+    },
+    {
+      "from": 71,
+      "to": 76,
+      "type": "WAR",
+      "register": "RDX"
+    },
+    {
+      "from": 74,
+      "to": 76,
+      "type": "WAR",
+      "register": "RDX"
+    },
+    {
+      "from": 76,
+      "to": 77,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 54,
+      "to": 77,
+      "type": "WAW",
+      "register": "R10"
+    },
+    {
+      "from": 55,
+      "to": 77,
+      "type": "WAR",
+      "register": "R10"
+    },
+    {
+      "from": 75,
+      "to": 77,
+      "type": "WAR",
+      "register": "R10"
+    },
+    {
+      "from": 65,
+      "to": 78,
+      "type": "RAW",
+      "register": "RSI"
+    },
+    {
+      "from": 68,
+      "to": 78,
+      "type": "WAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 66,
+      "to": 79,
+      "type": "RAW",
+      "register": "XMM0"
+    },
+    {
+      "from": 78,
+      "to": 79,
+      "type": "RAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 72,
+      "to": 80,
+      "type": "RAW",
+      "register": "RAX"
+    },
+    {
+      "from": 77,
+      "to": 80,
+      "type": "WAW",
+      "register": "R10"
+    },
+    {
+      "from": 74,
+      "to": 81,
+      "type": "RAW",
+      "register": "R8"
+    },
+    {
+      "from": 65,
+      "to": 81,
+      "type": "WAW",
+      "register": "RSI"
+    },
+    {
+      "from": 72,
+      "to": 81,
+      "type": "WAR",
+      "register": "RSI"
+    },
+    {
+      "from": 73,
+      "to": 81,
+      "type": "WAR",
+      "register": "RSI"
+    },
+    {
+      "from": 78,
+      "to": 81,
+      "type": "WAR",
+      "register": "RSI"
+    },
+    {
+      "from": 64,
+      "to": 82,
+      "type": "RAW",
+      "register": "R11"
+    },
+    {
+      "from": 80,
+      "to": 82,
+      "type": "RAW",
+      "register": "R10"
+    },
+    {
+      "from": 76,
+      "to": 82,
+      "type": "WAW",
+      "register": "RDX"
+    },
+    {
+      "from": 77,
+      "to": 82,
+      "type": "WAR",
+      "register": "RDX"
+    },
+    {
+      "from": 66,
+      "to": 83,
+      "type": "RAW",
+      "register": "XMM0"
+    },
+    {
+      "from": 82,
+      "to": 83,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 74,
+      "to": 84,
+      "type": "RAW",
+      "register": "R8"
+    },
+    {
+      "from": 72,
+      "to": 84,
+      "type": "RAW",
+      "register": "RAX"
+    },
+    {
+      "from": 78,
+      "to": 84,
+      "type": "WAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 79,
+      "to": 84,
+      "type": "WAR",
+      "register": "XMM1"
+    },
+    {
+      "from": 70,
+      "to": 85,
+      "type": "RAW",
+      "register": "R9"
+    },
+    {
+      "from": 84,
+      "to": 85,
+      "type": "WAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 32,
+      "to": 86,
+      "type": "RAW",
+      "register": "RBX"
+    },
+    {
+      "from": 70,
+      "to": 86,
+      "type": "WAW",
+      "register": "R9"
+    },
+    {
+      "from": 85,
+      "to": 86,
+      "type": "WAR",
+      "register": "R9"
+    },
+    {
+      "from": 80,
+      "to": 87,
+      "type": "RAW",
+      "register": "R10"
+    },
+    {
+      "from": 85,
+      "to": 87,
+      "type": "RAW",
+      "register": "XMM1"
+    },
+    {
+      "from": 82,
+      "to": 88,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 81,
+      "to": 88,
+      "type": "WAW",
+      "register": "RSI"
+    },
+    {
+      "from": 56,
+      "to": 89,
+      "type": "RAW",
+      "register": "RCX"
+    },
+    {
+      "from": 74,
+      "to": 89,
+      "type": "WAW",
+      "register": "R8"
+    },
+    {
+      "from": 76,
+      "to": 89,
+      "type": "WAR",
+      "register": "R8"
+    },
+    {
+      "from": 81,
+      "to": 89,
+      "type": "WAR",
+      "register": "R8"
+    },
+    {
+      "from": 84,
+      "to": 89,
+      "type": "WAR",
+      "register": "R8"
+    },
+    {
+      "from": 86,
+      "to": 90,
+      "type": "RAW",
+      "register": "R9"
+    },
+    {
+      "from": 80,
+      "to": 90,
+      "type": "RAW",
+      "register": "R10"
+    },
+    {
+      "from": 89,
+      "to": 90,
+      "type": "WAW",
+      "register": "R8"
+    },
+    {
+      "from": 73,
+      "to": 91,
+      "type": "RAW",
+      "register": "RDI"
+    },
+    {
+      "from": 86,
+      "to": 92,
+      "type": "RAW",
+      "register": "R9"
+    },
+    {
+      "from": 56,
+      "to": 92,
+      "type": "RAW",
+      "register": "RCX"
+    },
+    {
+      "from": 66,
+      "to": 92,
+      "type": "WAW",
+      "register": "XMM0"
+    },
+    {
+      "from": 70,
+      "to": 92,
+      "type": "WAR",
+      "register": "XMM0"
+    },
+    {
+      "from": 79,
+      "to": 92,
+      "type": "WAR",
+      "register": "XMM0"
+    },
+    {
+      "from": 83,
+      "to": 92,
+      "type": "WAR",
+      "register": "XMM0"
+    },
+    {
+      "from": 82,
+      "to": 93,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 80,
+      "to": 93,
+      "type": "WAW",
+      "register": "R10"
+    },
+    {
+      "from": 82,
+      "to": 93,
+      "type": "WAR",
+      "register": "R10"
+    },
+    {
+      "from": 87,
+      "to": 93,
+      "type": "WAR",
+      "register": "R10"
+    },
+    {
+      "from": 90,
+      "to": 93,
+      "type": "WAR",
+      "register": "R10"
+    },
+    {
+      "from": 82,
+      "to": 94,
+      "type": "RAW",
+      "register": "RDX"
+    },
+    {
+      "from": 64,
+      "to": 94,
+      "type": "WAW",
+      "register": "R11"
+    },
+    {
+      "from": 69,
+      "to": 94,
+      "type": "WAR",
+      "register": "R11"
+    },
+    {
+      "from": 82,
+      "to": 94,
+      "type": "WAR",
+      "register": "R11"
+    },
+    {
+      "from": 86,
+      "to": 95,
+      "type": "RAW",
+      "register": "R9"
+    },
+    {
+      "from": 92,
+      "to": 96,
+      "type": "RAW",
+      "register": "XMM0"
+    },
+    {
+      "from": 56,
+      "to": 96,
+      "type": "RAW",
+      "register": "RCX"
+    },
+    {
+      "from": 90,
+      "to": 96,
+      "type": "WAW",
+      "register": "R8"
+    },
+    {
+      "from": 73,
+      "to": 97,
+      "type": "RAW",
+      "register": "RDI"
+    },
+    {
+      "from": 92,
+      "to": 97,
+      "type": "RAW",
+      "register": "XMM0"
+    },
+    {
+      "from": 32,
+      "to": 97,
+      "type": "WAW",
+      "register": "RBX"
+    },
+    {
+      "from": 33,
+      "to": 97,
+      "type": "WAR",
+      "register": "RBX"
+    },
+    {
+      "from": 40,
+      "to": 97,
+      "type": "WAR",
+      "register": "RBX"
+    },
+    {
+      "from": 41,
+      "to": 97,
+      "type": "WAR",
+      "register": "RBX"
+    },
+    {
+      "from": 57,
+      "to": 97,
+      "type": "WAR",
+      "register": "RBX"
+    },
+    {
+      "from": 57,
+      "to": 97,
+      "type": "WAR",
+      "register": "RBX"
+    },
+    {
+      "from": 73,
+      "to": 97,
+      "type": "WAR",
+      "register": "RBX"
+    },
+    {
+      "from": 86,
+      "to": 97,
+      "type": "WAR",
+      "register": "RBX"
+    },
+    {
+      "from": 97,
+      "to": 98,
+      "type": "RAW",
+      "register": "RBX"
+    },
+    {
+      "from": 92,
+      "to": 98,
+      "type": "RAW",
+      "register": "XMM0"
+    },
+    {
+      "from": 92,
+      "to": 98,
+      "type": "WAW",
+      "register": "XMM0"
+    },
+    {
+      "from": 96,
+      "to": 98,
+      "type": "WAR",
+      "register": "XMM0"
+    },
+    {
+      "from": 97,
+      "to": 98,
+      "type": "WAR",
+      "register": "XMM0"
+    },
+    {
+      "from": 98,
+      "to": 99,
+      "type": "RAW",
+      "register": "XMM0"
+    }
+  ],
+  "criticalPath": [
+    0,
+    10,
+    30,
+    50,
+    80,
+    99
+  ],
+  "timeline": [
+    {
+      "cycle": 0,
+      "issued": [
+        0,
+        1
+      ],
+      "completed": [],
+      "inFlight": []
+    },
+    {
+      "cycle": 1,
+      "issued": [
+        2,
+        3
+      ],
+      "completed": [],
+      "inFlight": [
+        0,
+        1
+      ]
+    },
+    {
+      "cycle": 2,
+      "issued": [
+        4,
+        5
+      ],
+      "completed": [
+        2
+      ],
+      "inFlight": [
+        0,
+        1,
+        3
+      ]
+    },
+    {
+      "cycle": 3,
+      "issued": [
+        6,
+        7
+      ],
+      "completed": [
+        3,
+        5
+      ],
+      "inFlight": [
+        0,
+        1,
+        4
+      ]
+    },
+    {
+      "cycle": 4,
+      "issued": [
+        8
+      ],
+      "completed": [
+        0,
+        1,
+        7
+      ],
+      "inFlight": [
+        4,
+        6
+      ]
+    },
+    {
+      "cycle": 5,
+      "issued": [
+        9,
+        10
+      ],
+      "completed": [],
+      "inFlight": [
+        4,
+        6,
+        8
+      ]
+    },
+    {
+      "cycle": 6,
+      "issued": [
+        11,
+        12
+      ],
+      "completed": [
+        4,
+        10
+      ],
+      "inFlight": [
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "cycle": 7,
+      "issued": [
+        13,
+        14
+      ],
+      "completed": [
+        6
+      ],
+      "inFlight": [
+        8,
+        9,
+        11,
+        12
+      ]
+    },
+    {
+      "cycle": 8,
+      "issued": [
+        15,
+        16
+      ],
+      "completed": [
+        8,
+        11,
+        13
+      ],
+      "inFlight": [
+        9,
+        12,
+        14
+      ]
+    },
+    {
+      "cycle": 9,
+      "issued": [
+        17
+      ],
+      "completed": [
+        9,
+        15
+      ],
+      "inFlight": [
+        12,
+        14,
+        16
+      ]
+    },
+    {
+      "cycle": 10,
+      "issued": [
+        18,
+        19
+      ],
+      "completed": [
+        12
+      ],
+      "inFlight": [
+        14,
+        16,
+        17
+      ]
+    },
+    {
+      "cycle": 11,
+      "issued": [
+        20,
+        21
+      ],
+      "completed": [
+        14,
+        18
+      ],
+      "inFlight": [
+        16,
+        17,
+        19
+      ]
+    },
+    {
+      "cycle": 12,
+      "issued": [
+        22,
+        23
+      ],
+      "completed": [
+        16,
+        19,
+        21
+      ],
+      "inFlight": [
+        17,
+        20
+      ]
+    },
+    {
+      "cycle": 13,
+      "issued": [
+        24,
+        25
+      ],
+      "completed": [
+        17,
+        23
+      ],
+      "inFlight": [
+        20,
+        22
+      ]
+    },
+    {
+      "cycle": 14,
+      "issued": [
+        26
+      ],
+      "completed": [],
+      "inFlight": [
+        20,
+        22,
+        24,
+        25
+      ]
+    },
+    {
+      "cycle": 15,
+      "issued": [
+        27,
+        28
+      ],
+      "completed": [
+        20,
+        26
+      ],
+      "inFlight": [
+        22,
+        24,
+        25
+      ]
+    },
+    {
+      "cycle": 16,
+      "issued": [
+        29,
+        30
+      ],
+      "completed": [
+        22
+      ],
+      "inFlight": [
+        24,
+        25,
+        27,
+        28
+      ]
+    },
+    {
+      "cycle": 17,
+      "issued": [
+        31,
+        32
+      ],
+      "completed": [
+        24,
+        25,
+        27,
+        29
+      ],
+      "inFlight": [
+        28,
+        30
+      ]
+    },
+    {
+      "cycle": 18,
+      "issued": [
+        33,
+        34
+      ],
+      "completed": [
+        31
+      ],
+      "inFlight": [
+        28,
+        30,
+        32
+      ]
+    },
+    {
+      "cycle": 19,
+      "issued": [
+        35
+      ],
+      "completed": [
+        28,
+        34
+      ],
+      "inFlight": [
+        30,
+        32,
+        33
+      ]
+    },
+    {
+      "cycle": 20,
+      "issued": [
+        36,
+        37
+      ],
+      "completed": [
+        30
+      ],
+      "inFlight": [
+        32,
+        33,
+        35
+      ]
+    },
+    {
+      "cycle": 21,
+      "issued": [
+        38,
+        39
+      ],
+      "completed": [
+        32,
+        35,
+        37
+      ],
+      "inFlight": [
+        33,
+        36
+      ]
+    },
+    {
+      "cycle": 22,
+      "issued": [
+        40,
+        41
+      ],
+      "completed": [
+        33,
+        39
+      ],
+      "inFlight": [
+        36,
+        38
+      ]
+    },
+    {
+      "cycle": 23,
+      "issued": [
+        42,
+        43
+      ],
+      "completed": [],
+      "inFlight": [
+        36,
+        38,
+        40,
+        41
+      ]
+    },
+    {
+      "cycle": 24,
+      "issued": [
+        44
+      ],
+      "completed": [
+        36,
+        42
+      ],
+      "inFlight": [
+        38,
+        40,
+        41,
+        43
+      ]
+    },
+    {
+      "cycle": 25,
+      "issued": [
+        45,
+        46
+      ],
+      "completed": [
+        38,
+        43
+      ],
+      "inFlight": [
+        40,
+        41,
+        44
+      ]
+    },
+    {
+      "cycle": 26,
+      "issued": [
+        47,
+        48
+      ],
+      "completed": [
+        40,
+        41,
+        45
+      ],
+      "inFlight": [
+        44,
+        46
+      ]
+    },
+    {
+      "cycle": 27,
+      "issued": [
+        49,
+        50
+      ],
+      "completed": [
+        47
+      ],
+      "inFlight": [
+        44,
+        46,
+        48
+      ]
+    },
+    {
+      "cycle": 28,
+      "issued": [
+        51,
+        52
+      ],
+      "completed": [
+        44,
+        50
+      ],
+      "inFlight": [
+        46,
+        48,
+        49
+      ]
+    },
+    {
+      "cycle": 29,
+      "issued": [
+        53
+      ],
+      "completed": [
+        46
+      ],
+      "inFlight": [
+        48,
+        49,
+        51,
+        52
+      ]
+    },
+    {
+      "cycle": 30,
+      "issued": [
+        54,
+        55
+      ],
+      "completed": [
+        48,
+        51,
+        53
+      ],
+      "inFlight": [
+        49,
+        52
+      ]
+    },
+    {
+      "cycle": 31,
+      "issued": [
+        56,
+        57
+      ],
+      "completed": [
+        49,
+        55
+      ],
+      "inFlight": [
+        52,
+        54
+      ]
+    },
+    {
+      "cycle": 32,
+      "issued": [
+        58,
+        59
+      ],
+      "completed": [
+        52
+      ],
+      "inFlight": [
+        54,
+        56,
+        57
+      ]
+    },
+    {
+      "cycle": 33,
+      "issued": [
+        60,
+        61
+      ],
+      "completed": [
+        58
+      ],
+      "inFlight": [
+        54,
+        56,
+        57,
+        59
+      ]
+    },
+    {
+      "cycle": 34,
+      "issued": [
+        62
+      ],
+      "completed": [
+        54,
+        59,
+        61
+      ],
+      "inFlight": [
+        56,
+        57,
+        60
+      ]
+    },
+    {
+      "cycle": 35,
+      "issued": [
+        63,
+        64
+      ],
+      "completed": [
+        56,
+        57
+      ],
+      "inFlight": [
+        60,
+        62
+      ]
+    },
+    {
+      "cycle": 36,
+      "issued": [
+        65,
+        66
+      ],
+      "completed": [
+        63
+      ],
+      "inFlight": [
+        60,
+        62,
+        64
+      ]
+    },
+    {
+      "cycle": 37,
+      "issued": [
+        67,
+        68
+      ],
+      "completed": [
+        60,
+        66
+      ],
+      "inFlight": [
+        62,
+        64,
+        65
+      ]
+    },
+    {
+      "cycle": 38,
+      "issued": [
+        69,
+        70
+      ],
+      "completed": [
+        62
+      ],
+      "inFlight": [
+        64,
+        65,
+        67,
+        68
+      ]
+    },
+    {
+      "cycle": 39,
+      "issued": [
+        71
+      ],
+      "completed": [
+        64,
+        67,
+        69
+      ],
+      "inFlight": [
+        65,
+        68,
+        70
+      ]
+    },
+    {
+      "cycle": 40,
+      "issued": [
+        72,
+        73
+      ],
+      "completed": [
+        65,
+        71
+      ],
+      "inFlight": [
+        68,
+        70
+      ]
+    },
+    {
+      "cycle": 41,
+      "issued": [
+        74,
+        75
+      ],
+      "completed": [
+        68
+      ],
+      "inFlight": [
+        70,
+        72,
+        73
+      ]
+    },
+    {
+      "cycle": 42,
+      "issued": [
+        76,
+        77
+      ],
+      "completed": [
+        70,
+        74
+      ],
+      "inFlight": [
+        72,
+        73,
+        75
+      ]
+    },
+    {
+      "cycle": 43,
+      "issued": [
+        78,
+        79
+      ],
+      "completed": [
+        75,
+        77
+      ],
+      "inFlight": [
+        72,
+        73,
+        76
+      ]
+    },
+    {
+      "cycle": 44,
+      "issued": [
+        80
+      ],
+      "completed": [
+        72,
+        73,
+        79
+      ],
+      "inFlight": [
+        76,
+        78
+      ]
+    },
+    {
+      "cycle": 45,
+      "issued": [
+        81,
+        82
+      ],
+      "completed": [],
+      "inFlight": [
+        76,
+        78,
+        80
+      ]
+    },
+    {
+      "cycle": 46,
+      "issued": [
+        83,
+        84
+      ],
+      "completed": [
+        76,
+        82
+      ],
+      "inFlight": [
+        78,
+        80,
+        81
+      ]
+    },
+    {
+      "cycle": 47,
+      "issued": [
+        85,
+        86
+      ],
+      "completed": [
+        78
+      ],
+      "inFlight": [
+        80,
+        81,
+        83,
+        84
+      ]
+    },
+    {
+      "cycle": 48,
+      "issued": [
+        87,
+        88
+      ],
+      "completed": [
+        80,
+        83,
+        85
+      ],
+      "inFlight": [
+        81,
+        84,
+        86
+      ]
+    },
+    {
+      "cycle": 49,
+      "issued": [
+        89
+      ],
+      "completed": [
+        81,
+        87
+      ],
+      "inFlight": [
+        84,
+        86,
+        88
+      ]
+    },
+    {
+      "cycle": 50,
+      "issued": [
+        90,
+        91
+      ],
+      "completed": [
+        84
+      ],
+      "inFlight": [
+        86,
+        88,
+        89
+      ]
+    },
+    {
+      "cycle": 51,
+      "issued": [
+        92,
+        93
+      ],
+      "completed": [
+        86,
+        90
+      ],
+      "inFlight": [
+        88,
+        89,
+        91
+      ]
+    },
+    {
+      "cycle": 52,
+      "issued": [
+        94,
+        95
+      ],
+      "completed": [
+        88,
+        91,
+        93
+      ],
+      "inFlight": [
+        89,
+        92
+      ]
+    },
+    {
+      "cycle": 53,
+      "issued": [
+        96,
+        97
+      ],
+      "completed": [
+        89,
+        95
+      ],
+      "inFlight": [
+        92,
+        94
+      ]
+    },
+    {
+      "cycle": 54,
+      "issued": [
+        98
+      ],
+      "completed": [],
+      "inFlight": [
+        92,
+        94,
+        96,
+        97
+      ]
+    },
+    {
+      "cycle": 55,
+      "issued": [
+        99
+      ],
+      "completed": [
+        92,
+        98
+      ],
+      "inFlight": [
+        94,
+        96,
+        97
+      ]
+    },
+    {
+      "cycle": 56,
+      "issued": [],
+      "completed": [
+        94
+      ],
+      "inFlight": [
+        96,
+        97,
+        99
+      ]
+    },
+    {
+      "cycle": 57,
+      "issued": [],
+      "completed": [
+        96,
+        97,
+        99
+      ],
+      "inFlight": []
+    }
+  ],
+  "parallelismHistogram": {
+    "0": 1,
+    "2": 1,
+    "3": 3,
+    "4": 19,
+    "5": 28,
+    "6": 6
+  }
+}
